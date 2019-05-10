@@ -47,6 +47,7 @@
 	                        if($veri->rowCount()){                           
 	                        foreach($veri as $row){  
 	                            $row['urun_id'];
+	                            $a= $row['urun_id'];
 	                ?>
 					<div class="product-details"><!--product-details-->
 						<!--ürün-resim-->
@@ -60,7 +61,7 @@
 						<div class="col-sm-7">
 							<div class="product-information"><!--/product-information-->
 								<img src="images/product-details/new.jpg" class="newarrival" alt="" />
-								<h2><?php echo $row['urun_isim']; ?></h2>
+								<h2 style="text-transform: capitalize;"><?php echo $row['urun_isim']; ?></h2>
 								<p>Ürün ID: <?php echo $row['urun_id']; ?></p>
 								<p>Ürün Stok: <?php echo $row['urun_stok']; ?></p>
 								<img src="images/product-details/rating.png" alt="" /><br>
@@ -72,8 +73,10 @@
 										<i class="fa fa-shopping-cart"></i>
 										Sepete Ekle
 									</button>
-								</span>							
-								<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+								</span><br>	
+								<?php echo "<a href='begen.php?id=".$a."' name='btn_favori' style='font-size: 20px;''>";?>
+								<i class="fa fa-thumbs-up"></i>Favori</a>
+								<span style="font-size: 20px;"><?php echo $row['urun_favori']; ?></span>
 							</div><!--/product-information-->
 						</div>
 						<!--ürün-detay bilgileri bitti-->

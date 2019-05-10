@@ -1,11 +1,5 @@
 <?php require_once("baglan.php"); ?>
 <!DOCTYPE html>
-
-<?php 
-    if(@$_SESSION){               
-         $_SESSION["uye"];        
-    }
-?>  
 <html lang="tr">
 <head>
     <meta charset="utf-8">
@@ -32,6 +26,12 @@
 </head><!--/head-->
 
 <body>
+	<?php 
+	    if(@$_SESSION){               
+	         $_SESSION["uye"]; 
+	           $_SESSION["id"];     
+	    }
+	?>  
 
 	<!--header kısmını çagırıyoruz-->
 	<?php require_once("header_kullanici.php"); ?>
@@ -110,23 +110,21 @@
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">HAFTANIN ÜRÜNLERİ</h2>
-						<?php $konumfirma=$db->query("select  * from uye where uye_il='".$_SESSION["il"]."' and uye_tur='Firma' ")->fetchAll(PDO::FETCH_ASSOC); ?>
+						<?php $konumfirma=$db->query("select  * from uye where uye_il='".$_SESSION["il"]."' and uye_tur='Firma'")->fetchAll(PDO::FETCH_ASSOC); ?>
 						<?php 
 									foreach ($konumfirma as $keys => $valuefirma){
 										$valuefirma['uye_id'];
-                                    	
-                                    	}
-								?>
-								<?php
-									if (empty($valuefirma))
+                                    	if (empty($valuefirma))
 											{$valuefirma['uye_firmaad']=" aa";}
-								 ?>
+
+											 $haftalıkürünlist= $db->query("select  * from urun where (urun_firma='".$valuefirma['uye_firmaad']."') ")->fetchAll(PDO::FETCH_ASSOC); 
+                                    	
+								?>
 								
-						<?php $haftalıkürünlist= $db->query("select  * from urun where (urun_firma='".$valuefirma['uye_firmaad']."') ")->fetchAll(PDO::FETCH_ASSOC); ?>
 								<?php 
 									foreach ($haftalıkürünlist as $key => $value){
 										$value['urun_id'];
-                                    	@$a=$urun['urun_id'];
+                                    	
 								?>
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
@@ -142,7 +140,7 @@
 											<div class="overlay-content">
 												<h2><?php echo $value['urun_fiyat'];?> TL</h2>
 												<p><?php echo $value['urun_isim'];?></p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i> Sepete Ekle</a>
+												<a href="sepet.php?id=<?php echo $value['urun_id']; ?>"class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i> Sepete Ekle</a>
 											</div>
 										</div>
 								</div>
@@ -150,7 +148,7 @@
 							</div>
 						</div>
 					<?php } ?>
-						
+					<?php } ?>	
 						
 					</div><!--features_items-->
 					
@@ -170,6 +168,10 @@
 							<div class="tab-pane fade active in" id="meyvesebze" >
 
 								<?php	
+								foreach ($konumfirma as $keys => $valuefirma){
+										$valuefirma['uye_id'];
+                                    	if (empty($valuefirma))
+											{$valuefirma['uye_firmaad']=" aa";}
 								@$urunlist= $db->query("select * from urun where  urun_firma='".$valuefirma['uye_firmaad']."' and (urun_kategori=10 or urun_kategori=11)")->fetchAll(PDO::FETCH_ASSOC);															
 									foreach ($urunlist as $key => $value){
 										$value['urun_id'];
@@ -182,7 +184,7 @@
 												<img src="admin_firma/<?php echo $value['urun_resim'];?>" style="width: 100%; height: 150px;" >
 												<h2><?php echo $value['urun_fiyat'];?> TL</h2>
 												<h3><?php echo $value['urun_isim'];?></h3>
-												<?php echo "<a href='product-details.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
+												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
 												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>								
 											</div>
@@ -192,13 +194,17 @@
 									</div>
 								
 								<?php } ?>
-								
+								<?php } ?>
 								
 							</div>
 							
 							<div class="tab-pane fade" id="etbalik" >
 
 								<?php	
+								foreach ($konumfirma as $keys => $valuefirma){
+										$valuefirma['uye_id'];
+                                    	if (empty($valuefirma))
+											{$valuefirma['uye_firmaad']=" aa";}
 								$urunlist= $db->query("select * from urun where urun_firma='".$valuefirma['uye_firmaad']."' and (urun_kategori=12 or urun_kategori=13 or urun_kategori=14 or urun_kategori=15)")->fetchAll(PDO::FETCH_ASSOC);
 								
 								?>
@@ -214,7 +220,7 @@
 												<img src="admin_firma/<?php echo $value['urun_resim'];?>" style="width: 100%; height: 150px;" >
 												<h2><?php echo $value['urun_fiyat'];?> TL</h2>
 												<h3><?php echo $value['urun_isim'];?></h3>
-												<?php echo "<a href='product-details.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
+												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
 												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
 											</div>
@@ -224,13 +230,17 @@
 									</div>
 								
 								<?php } ?>
-
+								<?php } ?>
 								
 								
 							</div>
 							
 							<div class="tab-pane fade" id="kahvaltilik" >
 								<?php	
+								foreach ($konumfirma as $keys => $valuefirma){
+										$valuefirma['uye_id'];
+                                    	if (empty($valuefirma))
+											{$valuefirma['uye_firmaad']=" aa";}
 								$urunlist= $db->query("select * from urun where urun_firma='".$valuefirma['uye_firmaad']."' and  (urun_kategori=16 or urun_kategori=17 or urun_kategori=18 or urun_kategori=19 or urun_kategori=20 or urun_kategori=21 or urun_kategori=22 or urun_kategori=23 or urun_kategori=24  )")->fetchAll(PDO::FETCH_ASSOC);
 								
 								?>
@@ -246,7 +256,7 @@
 												<img src="admin_firma/<?php echo $value['urun_resim'];?>" style="width: 100%; height: 150px;" >
 												<h2><?php echo $value['urun_fiyat'];?> TL</h2>
 												<h3><?php echo $value['urun_isim'];?></h3>
-												<?php echo "<a href='product-details.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
+												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
 												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
 											</div>
@@ -257,11 +267,15 @@
 								
 								<?php } ?>
 
-								
+								<?php } ?>
 							</div>
 							
 							<div class="tab-pane fade" id="gida" >
 								<?php	
+								foreach ($konumfirma as $keys => $valuefirma){
+										$valuefirma['uye_id'];
+                                    	if (empty($valuefirma))
+											{$valuefirma['uye_firmaad']=" aa";}
 								$urunlist= $db->query("select * from urun where urun_firma='".$valuefirma['uye_firmaad']."' and  (urun_kategori=25 or urun_kategori=26 or urun_kategori=27 or urun_kategori=28 or urun_kategori=29 or urun_kategori=30 or urun_kategori=31 or urun_kategori=32 or urun_kategori=33 or urun_kategori=34 or urun_kategori=35 or urun_kategori=36 or urun_kategori=37 or urun_kategori=38)")->fetchAll(PDO::FETCH_ASSOC);
 								
 								?>
@@ -277,7 +291,7 @@
 												<img src="admin_firma/<?php echo $value['urun_resim'];?>" style="width: 100%; height: 150px;" >
 												<h2><?php echo $value['urun_fiyat'];?> TL</h2>
 												<h3><?php echo $value['urun_isim'];?></h3>
-												<?php echo "<a href='product-details.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
+												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
 												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
 											</div>
@@ -287,11 +301,15 @@
 									</div>
 								
 								<?php } ?>
-								
+								<?php } ?>
 							</div>
 							
 							<div class="tab-pane fade" id="icecek" >
 								<?php	
+								foreach ($konumfirma as $keys => $valuefirma){
+										$valuefirma['uye_id'];
+                                    	if (empty($valuefirma))
+											{$valuefirma['uye_firmaad']=" aa";}
 								$urunlist= $db->query("select * from urun where urun_firma='".$valuefirma['uye_firmaad']."' and  (urun_kategori=39 or urun_kategori=40 or urun_kategori=41 or urun_kategori=42 or urun_kategori=43 or urun_kategori=44 )")->fetchAll(PDO::FETCH_ASSOC);
 								
 								?>
@@ -307,7 +325,7 @@
 												<img src="admin_firma/<?php echo $value['urun_resim'];?>" style="width: 100%; height: 150px;"  >
 												<h2><?php echo $value['urun_fiyat'];?> TL</h2>
 												<h3><?php echo $value['urun_isim'];?></h3>
-												<?php echo "<a href='product-details.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
+												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
 												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
 											</div>
@@ -317,7 +335,7 @@
 									</div>
 								
 								<?php } ?>
-								
+								<?php } ?>
 							</div>
 						</div>
 					</div><!--/category-tab-->
@@ -334,6 +352,10 @@
 						<div class="tab-content">
 							<div class="tab-pane fade active in" id="temizlik" >
 								<?php	
+								foreach ($konumfirma as $keys => $valuefirma){
+										$valuefirma['uye_id'];
+                                    	if (empty($valuefirma))
+											{$valuefirma['uye_firmaad']=" aa";}
 								@$urunlist= $db->query("select * from urun where (urun_firma='".$valuefirma['uye_firmaad']."')and  (urun_kategori=45 or urun_kategori=46 or urun_kategori=47 or urun_kategori=48 or urun_kategori=49 or urun_kategori=50 )")->fetchAll(PDO::FETCH_ASSOC);
 								
 								?>
@@ -349,7 +371,7 @@
 												<img src="admin_firma/<?php echo $value['urun_resim'];?>" style="width: 100%; height: 150px;" >
 												<h2><?php echo $value['urun_fiyat'];?> TL</h2>
 												<h3><?php echo $value['urun_isim'];?></h3>
-												<?php echo "<a href='product-details.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
+												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
 												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
 											</div>
@@ -359,13 +381,17 @@
 									</div>
 								
 								<?php } ?>
-								
+								<?php } ?>
 							</div>
 						
 
 						
 							<div class="tab-pane fade active in" id="kozmetik" >
 								<?php	
+								foreach ($konumfirma as $keys => $valuefirma){
+										$valuefirma['uye_id'];
+                                    	if (empty($valuefirma))
+											{$valuefirma['uye_firmaad']=" aa";}
 								$urunlist= $db->query("select * from urun where urun_firma='".$valuefirma['uye_firmaad']."' and  (urun_kategori=51 or urun_kategori=52 or urun_kategori=53 or urun_kategori=54 or urun_kategori=55 or urun_kategori=56 or urun_kategori=57 or urun_kategori=58 or urun_kategori=59 or urun_kategori=60 or urun_kategori=61 or urun_kategori=62 )")->fetchAll(PDO::FETCH_ASSOC);
 								
 								?>
@@ -381,7 +407,7 @@
 												<img src="admin_firma/<?php echo $value['urun_resim'];?>" style="width: 100%; height: 150px;" >
 												<h2><?php echo $value['urun_fiyat'];?> TL</h2>
 												<h3><?php echo $value['urun_isim'];?></h3>
-												<?php echo "<a href='product-details.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
+												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
 												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
 											</div>
@@ -391,13 +417,17 @@
 									</div>
 								
 								<?php } ?>
-								
+								<?php } ?>
 							</div>
 						
 
 						
 							<div class="tab-pane fade active in" id="bebek" >
 								<?php	
+								foreach ($konumfirma as $keys => $valuefirma){
+										$valuefirma['uye_id'];
+                                    	if (empty($valuefirma))
+											{$valuefirma['uye_firmaad']=" aa";}
 								$urunlist= $db->query("select * from urun where urun_firma='".$valuefirma['uye_firmaad']."' and  (urun_kategori=63 or urun_kategori=64 or urun_kategori=65 or urun_kategori=66  )")->fetchAll(PDO::FETCH_ASSOC);
 								
 								?>
@@ -413,7 +443,7 @@
 												<img src="admin_firma/<?php echo $value['urun_resim'];?>" style="width: 100%; height: 150px;" >
 												<h2><?php echo $value['urun_fiyat'];?> TL</h2>
 												<h3><?php echo $value['urun_isim'];?></h3>
-												<?php echo "<a href='product-details.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
+												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
 												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
 											</div>
@@ -423,13 +453,17 @@
 									</div>
 								
 								<?php } ?>
-								
+								<?php } ?>
 							</div>
 						
 
 						
 							<div class="tab-pane fade active in" id="ev" >
 								<?php	
+								foreach ($konumfirma as $keys => $valuefirma){
+										$valuefirma['uye_id'];
+                                    	if (empty($valuefirma))
+											{$valuefirma['uye_firmaad']=" aa";}
 								$urunlist= $db->query("select * from urun where urun_firma='".$valuefirma['uye_firmaad']."' and  (urun_kategori=67 or urun_kategori=68 or urun_kategori=69 or urun_kategori=70 or urun_kategori=71 or urun_kategori=72 or urun_kategori=73 )")->fetchAll(PDO::FETCH_ASSOC);
 								
 								?>
@@ -445,7 +479,7 @@
 												<img src="admin_firma/<?php echo $value['urun_resim'];?>" style="width: 100%; height: 150px;" >
 												<h2><?php echo $value['urun_fiyat'];?> TL</h2>
 												<h3><?php echo $value['urun_isim'];?></h3>
-												<?php echo "<a href='product-details.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
+												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
 												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
 											</div>
@@ -455,7 +489,7 @@
 									</div>
 								
 								<?php } ?>
-								
+								<?php } ?>
 							</div>
 						</div>
 					</div>
@@ -467,7 +501,13 @@
 							
 							<div class="carousel-inner">
 								<div class="item active">	
-									<?php $firmalist= $db->query("select * from firma where firma_isim='".$valuefirma['uye_firmaad']."'  ")->fetchAll(PDO::FETCH_ASSOC); ?>
+
+									<?php 
+									foreach ($konumfirma as $keys => $valuefirma){
+										$valuefirma['uye_id'];
+                                    	if (empty($valuefirma))
+											{$valuefirma['uye_firmaad']=" aa";}
+									$firmalist= $db->query("select * from firma where firma_isim='".$valuefirma['uye_firmaad']."'  ")->fetchAll(PDO::FETCH_ASSOC); ?>
 								<?php 
 									foreach ($firmalist as $key => $value){
 										$value['firma_id'];
@@ -486,6 +526,7 @@
 										</div>
 									</div>
 									
+								<?php } ?>	
 								<?php } ?>	
 								</div>
 							</div>

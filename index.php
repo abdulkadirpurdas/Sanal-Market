@@ -446,15 +446,20 @@
 						<h2 class="title text-center">Öne Çıkan Firmalar</h2>
 						
 						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-							
+
 							<div class="carousel-inner">
-								<div class="item active">	
+								
+
+								<div class="item active">
 									<?php $firmalist= $db->query("select * from firma ")->fetchAll(PDO::FETCH_ASSOC); ?>
 								<?php 
+									
 									foreach ($firmalist as $key => $value){
 										$value['firma_id'];
                                     	$a=$value['firma_id'];
-								?>
+								
+									
+								?>	
 									<div class="col-sm-4">
 										<div class="product-image-wrapper">
 											<div class="single-products">
@@ -466,10 +471,14 @@
 												
 											</div>
 										</div>
+
+
 									</div>
 									
-								<?php } ?>	
+									<?php } ?>
 								</div>
+								
+
 							</div>
 							
 							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">

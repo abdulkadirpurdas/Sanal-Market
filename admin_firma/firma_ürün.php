@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!--[if !IE]><!--> <html lang="tr"> <!--<![endif]-->
 
 <!-- BEGIN HEAD-->
 <head>
@@ -40,6 +40,13 @@
     <!-- BEGIN BODY-->
 <body class="padTop53 " >
     <?php session_start(); ?>
+    <?php 
+        if($_SESSION){               
+            $uye=$_SESSION["uye"]; 
+            $eposta=$_SESSION["eposta"];
+            $b= $_SESSION["firma"];         
+        }
+    ?>  
      <!-- MAIN WRAPPER -->
     <div id="wrap">
 
@@ -63,212 +70,49 @@
                     <!-- MESSAGES SECTION -->
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span class="label label-success">2</span>    <i class="icon-envelope-alt"></i>&nbsp; <i class="icon-chevron-down"></i>
+                            <span class="label label-success">2</span><i class="icon-envelope-alt"></i>&nbsp; <i class="icon-chevron-down"></i>
                         </a>
 
                         <ul class="dropdown-menu dropdown-messages">
                             <li>
-                                <a href="#">
-                                    <div>
-                                       <strong>John Smith</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Today</em>
-                                        </span>
-                                    </div>
-                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing.
-                                        <br />
-                                        <span class="label label-primary">Important</span> 
+                                <?php                           
+                                $veri = $db->prepare("SELECT * FROM  mesaj where mesaj_okundu='0' and mesaj_alici='$eposta'"); 
+                                $veri ->execute();
+                                    if($veri->rowCount()){                           
+                                        foreach($veri as $row){  
+                                        $row['mesaj_id']; 
+                                        $a=$row['mesaj_id']; 
+                                ?>
 
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
+                                <?php echo "<a href='firma_read_mail.php?id=".$a."'>";?>
                                     <div>
-                                        <strong>Raphel Jonson</strong>
                                         <span class="pull-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing.
-                                         <br />
-                                        <span class="label label-success"> Moderate </span> 
-                                    </div>
+                                        <em><?php echo $row['mesaj_tarih'] ?></em>
+                                        </span><br>
+                                        <strong><?php echo $row['mesaj_gonderen'] ?></strong>
+                                        <div><?php echo $row['mesaj_konu'] ?></div>      
+                                    </div>                                   
                                 </a>
+                                <?php
+                                }
+                                }
+                                else{    
+                                    echo '<a class="text-center"> Mesaj bulunmamaktadır</a>';  
+                                }
+                                ?>
                             </li>
+                            
                             <li class="divider"></li>
                             <li>
-                                <a href="#">
-                                    <div>
-                                        <strong>Chi Ley Suk</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>26 Jan 2014</em>
-                                        </span>
-                                    </div>
-                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing.
-                                         <br />
-                                        <span class="label label-danger"> Low </span> 
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#">
-                                    <strong>Read All Messages</strong>
+                                <a class="text-center" href="firma_bildirim.php">
+                                    <strong>Tümünü Oku</strong>
                                     <i class="icon-angle-right"></i>
                                 </a>
                             </li>
                         </ul>
-
                     </li>
                     <!--END MESSAGES SECTION -->
-
-                    <!--TASK SECTION -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span class="label label-danger">5</span>   <i class="icon-tasks"></i>&nbsp; <i class="icon-chevron-down"></i>
-                        </a>
-
-                        <ul class="dropdown-menu dropdown-tasks">
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <p>
-                                            <strong> Profile </strong>
-                                            <span class="pull-right text-muted">40% Complete</span>
-                                        </p>
-                                        <div class="progress progress-striped active">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                                <span class="sr-only">40% Complete (success)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <p>
-                                            <strong> Pending Tasks </strong>
-                                            <span class="pull-right text-muted">20% Complete</span>
-                                        </p>
-                                        <div class="progress progress-striped active">
-                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                                <span class="sr-only">20% Complete</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <p>
-                                            <strong> Work Completed </strong>
-                                            <span class="pull-right text-muted">60% Complete</span>
-                                        </p>
-                                        <div class="progress progress-striped active">
-                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                                <span class="sr-only">60% Complete (warning)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <p>
-                                            <strong> Summary </strong>
-                                            <span class="pull-right text-muted">80% Complete</span>
-                                        </p>
-                                        <div class="progress progress-striped active">
-                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                                <span class="sr-only">80% Complete (danger)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#">
-                                    <strong>See All Tasks</strong>
-                                    <i class="icon-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-
-                    </li>
-                    <!--END TASK SECTION -->
-
-                    <!--ALERTS SECTION -->
-                    <li class="chat-panel dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span class="label label-info">8</span>   <i class="icon-comments"></i>&nbsp; <i class="icon-chevron-down"></i>
-                        </a>
-
-                        <ul class="dropdown-menu dropdown-alerts">
-
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="icon-comment" ></i> New Comment
-                                    <span class="pull-right text-muted small"> 4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="icon-twitter info"></i> 3 New Follower
-                                    <span class="pull-right text-muted small"> 9 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="icon-envelope"></i> Message Sent
-                                    <span class="pull-right text-muted small" > 20 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="icon-tasks"></i> New Task
-                                    <span class="pull-right text-muted small"> 1 Hour ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="icon-upload"></i> Server Rebooted
-                                    <span class="pull-right text-muted small"> 2 Hour ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#">
-                                    <strong>See All Alerts</strong>
-                                    <i class="icon-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-
-                    </li>
-                    <!-- END ALERTS SECTION -->
+                   
 
                     <!--ADMIN SETTINGS SECTIONS -->
 
@@ -281,7 +125,7 @@
                             <li><a href="#"><i class="icon-user"></i> User Profile </a>
                             </li>                          
                             <li class="divider"></li>
-                            <li><a href="../index.php"><i class="icon-signout"></i> Logout </a>
+                            <li><a href="cikis.php"><i class="icon-signout"></i> Logout </a>
                             </li>
                         </ul>
 
@@ -307,8 +151,7 @@
                         <h5 class="media-heading" style="font-weight: inherit; text-transform: capitalize; font-size: 16px;">
                             <?php 
                             if($_SESSION){               
-                                echo $_SESSION["uye"];  
-                                $b= $_SESSION["firma"];      
+                                echo $uye;                                    
                             }
                             ?>  
                         </h5>
@@ -414,7 +257,7 @@
                 </li>
                 <!-- MESAJ BİTTİ -->
 
-                <li><a href="login.html"><i class="icon-signin"></i> Login Page </a></li>
+                <li><a href="cikis.php"><i class="icon-signin"></i> Login Page </a></li>
 
              </ul>
 

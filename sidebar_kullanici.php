@@ -35,7 +35,7 @@
 										$sayac=$values['kategori_id']; 
 									?>		
 									<li>												
-										<?php echo "<a href='shop.php?id=".$sayac."'>";?><?php echo $values['kategori_isim'];?></a>
+										<?php echo "<a href='shop_kullanici.php?id=".$sayac."'>";?><?php echo $values['kategori_isim'];?></a>
 									</li>
 									<?php } ?>
 									<?php } ?>
@@ -50,7 +50,9 @@
 
 			<div class="brands_products"><!--brands_products-->
 				<h2>firma </h2>
+				
 				<script src="js/jquery-3.4.0.min.js"  type="text/javascript"></script>
+				 <form action="kullanici_ara.php" method="POST">
 				<div class="panel-group category-products" id="accordian">
 					<?php $il = $db->query("SELECT * FROM muh_iller where id='".$_SESSION["il"]."'")->fetchAll(PDO::FETCH_ASSOC); ?>
 					<?php $ilce = $db->query("SELECT * FROM muh_ilceler where id='".$_SESSION["ilce"]."'")->fetchAll(PDO::FETCH_ASSOC); ?>
@@ -58,7 +60,7 @@
 					<input class="form-control" type="text" name="konumbilgi" maxlength="100" id="message-text4" disabled="disabled"  placeholder="<?php foreach ($il as $key => $value) {echo $value['baslik'];}?>/<?php foreach ($ilce as $key => $value) {echo $value['baslik'];}?>" required/>	
 					<br> 
 					<?php $illist = $db->query("SELECT * FROM muh_iller")->fetchAll(PDO::FETCH_ASSOC); ?>
-				     	<select id="il2" name="uye_il" class="form-control">
+				     	<select id="il2" name="uye_il" class="form-control" required>
 							<option> İl Seçiniz</option>
 								<?php 
 									foreach ($illist as $key => $value) {
@@ -67,7 +69,7 @@
 								?>
 				      	</select>
 				      	<br> 
-				      	<select id="ilce2" name="uye_ilce" class="form-control">
+				      	<select id="ilce2" name="uye_ilce" class="form-control" required>
 							<script type="text/javascript"> 
 					      			$(document).ready(function(){		      				
 					      				$("#il2").change(function(){
@@ -86,11 +88,15 @@
 					      	</script>
 			      		</select> 
 			      		<br>
-			      		<button type="button">Ara</button>				
-				</div>	 
+			      		<button type="submit" name="btn_ara" >Ara</button>				
+				</div>
+				</form>	 
 			
 		</div><!--/brands_products-->
-						 
+				
+
+
+
 			<div class="price-range"><!--price-range-->
 				<h2>Fiyat Aralığı</h2>
 				<div class="well text-center">
