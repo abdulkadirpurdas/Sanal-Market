@@ -115,7 +115,8 @@
 											
 											document.getElementById(satir).innerHTML=Number(adet.value*fiyat)+".00 TL"; 
 											 var geneltoplam=document.getElementById("gtop").innerHTML;
-											 geneltoplam=(geneltoplam-fiyat)+(adet.value*fiyat);
+											 
+											 geneltoplam=Number(document.getElementById("gtop").innerHTML)+Number(fiyat);
 
 											document.getElementById("gtop").innerHTML=geneltoplam;
 											 
@@ -131,8 +132,8 @@
 												 adet.value=Number(adet.value)-1;
 												  document.getElementById(satir).innerHTML=Number(adet.value*fiyat)+".00 TL";
 												  var geneltoplam=document.getElementById("gtop").innerHTML;
-												  geneltoplam=(geneltoplam+fiyat)+(adet.value*fiyat);
-
+												  
+												   geneltoplam=Number(document.getElementById("gtop").innerHTML)-Number(fiyat);
 												  document.getElementById("gtop").innerHTML=geneltoplam;
 													 
 												  document.getElementById("toplam").innerHTML=Number(geneltoplam)+".00 TL";
@@ -167,68 +168,14 @@
 			</div>
 		</div>
 	</section> <!--/#cart_items-->
-
+<?php echo "<div id='odemetip' hidden> </div>"; ?>
 	<section id="do_action">
 		<div class="container">
 			<div class="heading">
-				<h3>Ödeme Tipini Seçiniz</h3>
+				<h3>Ödeme İşlemleri</h3>
 				
 			</div>
 			<div class="row">
-				<div class="col-sm-6">
-					<div class="chose_area">
-						<ul class="user_option">
-							<li>
-								<input type="checkbox">
-								<label>Use Coupon Code</label>
-							</li>
-							<li>
-								<input type="checkbox">
-								<label>Use Gift Voucher</label>
-							</li>
-							<li>
-								<input type="checkbox">
-								<label>Estimate Shipping & Taxes</label>
-							</li>
-						</ul>
-						<ul class="user_info">
-							<li class="single_field">
-								<label>Country:</label>
-								<select>
-									<option>United States</option>
-									<option>Bangladesh</option>
-									<option>UK</option>
-									<option>India</option>
-									<option>Pakistan</option>
-									<option>Ucrane</option>
-									<option>Canada</option>
-									<option>Dubai</option>
-								</select>
-								
-							</li>
-							<li class="single_field">
-								<label>Region / State:</label>
-								<select>
-									<option>Select</option>
-									<option>Dhaka</option>
-									<option>London</option>
-									<option>Dillih</option>
-									<option>Lahore</option>
-									<option>Alaska</option>
-									<option>Canada</option>
-									<option>Dubai</option>
-								</select>
-							
-							</li>
-							<li class="single_field zip-field">
-								<label>Zip Code:</label>
-								<input type="text">
-							</li>
-						</ul>
-						<a class="btn btn-default update" href="">Get Quotes</a>
-						<a class="btn btn-default check_out" href="">Continue</a>
-					</div>
-				</div>
 				<div class="col-sm-6">
 					<div class="total_area">
 						<ul>
@@ -237,14 +184,61 @@
 							<li>Kargo Ücreti <span>Ücretsiz</span></li>
 							
 						</ul>
-							<a class="btn btn-default update" href="">Alışverişe Devam Et</a>
-							<a class="btn btn-default check_out" href="">Alışverişi Bitir</a>
+							
 					</div>
 				</div>
+				<div class="col-sm-6">
+					<div class="chose_area">
+						<ul class="user_option">
+							
+							<select id="turrr"  class="form-control">
+							<option> Ödeme Türünü Seçiniz</option>
+							<option> Kapıda  Ödeme</option>
+							<option> Kredi Kartı</option>
+							<option> Sanal Kart</option>
+
+						</select>
+							
+						</ul>
+						
+						<a class="btn btn-default update" href="index_kullanici.php">Alışverişe Devam Et</a>
+							<a class="btn btn-default check_out" href="#" data-toggle="modal" id="alisveris" data-target="#sepetModal">Alışverişi Bitir</a>
+					</div>
+				</div>
+
+				
+ 
+
+						
 			</div>
 		</div>
+		
 	</section><!--/#do_action-->
-
+				<div class="modal fade" id="sepetModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+					  <div class="modal-content">
+						<div class="modal-header">
+						  <h5 class="modal-title"  id="exampleModalLabel" style="font-size:20px; text-align:center">Ödeme Yap</h5>
+						</div>
+						<div class="modal-body">
+						  <form action="" method="post">
+							<div class="form-group">
+							  <input type="text" class="form-control" name="uye_eposta" id="recipient-name" value=" ">
+							</div>
+							<div class="form-group">
+							  <input type="password" class="form-control" name="uye_sifre" id="message-text"  placeholder="Şifrenizi Giriniz"/>
+							</div>
+						  
+						</div>
+						<div class="modal-footer">
+							
+						  	<button type="button" class="btn btn-secondary"   data-dismiss="modal">Vazgeç</button>
+						  	<button type="submit" name="btn_tamamla" class="btn btn-primary">Ödemeyi Bitir</button>
+						</div>
+						</form>
+					  </div>
+					</div>
+				</div>
 	<!--footer kısmını çagırıyoruz-->
 	<?php require_once("footer.php"); ?>
 
