@@ -117,10 +117,11 @@
 											 var geneltoplam=document.getElementById("gtop").innerHTML;
 											 
 											 geneltoplam=Number(document.getElementById("gtop").innerHTML)+Number(fiyat);
-
+											
 											document.getElementById("gtop").innerHTML=geneltoplam;
 											 
 											document.getElementById("toplam").innerHTML=Number(geneltoplam)+".00 TL";
+
 										}
 
 										function azalt(id,fiyat,satir)
@@ -154,7 +155,7 @@
 							
 
 							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+								<a class="cart_quantity_delete" href="sepet_sil.php?id=<?php echo $values['urun_id']; ?> &uye_id=<?php echo $_SESSION['id']?> "><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
 					
@@ -168,7 +169,7 @@
 			</div>
 		</div>
 	</section> <!--/#cart_items-->
-<?php echo "<div id='odemetip' hidden> </div>"; ?>
+
 	<section id="do_action">
 		<div class="container">
 			<div class="heading">
@@ -179,7 +180,7 @@
 				<div class="col-sm-6">
 					<div class="total_area">
 						<ul>
-							<li >Toplam <span id="toplam"><?php echo $toplam;?>.00 TL</span></li>
+							<li >Toplam <span id="toplam"><script>   document.write(document.getElementById("gtop").innerHTML); </script>.00 TL</span></li>
 						
 							<li>Kargo Ücreti <span>Ücretsiz</span></li>
 							
@@ -191,9 +192,9 @@
 					<div class="chose_area">
 						<ul class="user_option">
 							
-							<select id="turrr"  class="form-control">
+							<select id="turrr"  class="form-control" required>
 							<option> Ödeme Türünü Seçiniz</option>
-							<option> Kapıda  Ödeme</option>
+							<option> Kapıda Ödeme</option>
 							<option> Kredi Kartı</option>
 							<option> Sanal Kart</option>
 
@@ -206,7 +207,29 @@
 					</div>
 				</div>
 
-				
+				<script> 
+		      			$(document).ready(function(){		      				
+		      				$("#turrr").change(function(){
+		      					 	  
+								 	if ($(this).val()=="Kredi Kartı") 
+								 	{
+								 		 document.getElementById("odemetur-kredikart").innerHTML=$(this).val();
+								 		$('#alisveris').attr('data-target','#kredikarti');
+									}
+									 else if ($(this).val()=="Kapıda Ödeme") 
+									 {
+									 	 document.getElementById("odemetur-kapida").innerHTML=$(this).val();
+								 		$('#alisveris').attr('data-target','#kapida');
+									 } 
+									 else if ($(this).val()=="Sanal Kart") 
+									 {
+									 	 document.getElementById("odemetur-sanalkart").innerHTML=$(this).val();
+								 		$('#alisveris').attr('data-target','#sanalkart');
+									 }
+
+		      				})
+		      			});
+		      		</script>
  
 
 						
@@ -214,7 +237,7 @@
 		</div>
 		
 	</section><!--/#do_action-->
-				<div class="modal fade" id="sepetModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal fade" id="kredikarti" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
 					  <div class="modal-content">
 						<div class="modal-header">
@@ -223,17 +246,109 @@
 						<div class="modal-body">
 						  <form action="" method="post">
 							<div class="form-group">
-							  <input type="text" class="form-control" name="uye_eposta" id="recipient-name" value=" ">
+							  <p id="odemetur-kredikart" style="float:left; " > </p>   <p>  &nbsp; İle Ödemeyi Seçtiniz...</p>
 							</div>
 							<div class="form-group">
-							  <input type="password" class="form-control" name="uye_sifre" id="message-text"  placeholder="Şifrenizi Giriniz"/>
+							  <input type="text" class="form-control" name="kredikarti_ad_soyad" id="kredikarti_ad_soyad"  placeholder="Kart Sahibinin Adı Soyad"/>
 							</div>
-						  
+							
+							<div class="form-group">
+							  <input type="text" class="form-control" name="kredikart_numarasi" id="kredikart_numarasi"  onkeypress="return isNumberKey(event)" placeholder="Kart Numarası "/>
+							</div>
+							
+							<div class="form-group">
+							  <input type="text" class="form-control" name="kredikart_ay" id="kredikart_ay" maxlength="2" onkeypress="return isNumberKey(event)"  style="width:45px; float:left;  margin-right:10px;" placeholder="Ay"/> 
+							    <input type="text" class="form-control" name="kredikart_yıl" id="kredikart_yıl" maxlength="2" onkeypress="return isNumberKey(event)"  style="width:45px;   " placeholder="Yıl"/>
+							</div>
+							
+							<div class="form-group">
+							  <input type="text" class="form-control" name="kredikart_cvv" id="kredikart_cvv" onkeypress="return isNumberKey(event)" maxlength="3" style="width:60px;" placeholder="CVV"/>
+							</div>
+						  	
+						  	<div class="form-group">
+							  <textarea  class="form-control" name="kredikart_adres" id="kredikart_adres" rows="6" placeholder="Adres"></textarea> 
+							</div>
+
 						</div>
+						<script type="text/javascript">
+			  		
+					  		 function isNumberKey(evt) 
+					  		{
+							    var charCode = (evt.which) ? evt.which : event.keyCode;
+							    if (charCode > 31 && (charCode < 48 || charCode > 57))
+							        return false;
+							    return true;
+							}
+					  	</script>
 						<div class="modal-footer">
 							
-						  	<button type="button" class="btn btn-secondary"   data-dismiss="modal">Vazgeç</button>
-						  	<button type="submit" name="btn_tamamla" class="btn btn-primary">Ödemeyi Bitir</button>
+						  	<button type="button" class="btn btn-secondary" id="kredikart_vazgec"   data-dismiss="modal">Vazgeç</button>
+						  	<button type="submit" name="kredikart_odeme_bitir" id="kredikart_odeme_bitir" class="btn btn-primary">Ödemeyi Bitir</button>
+						</div>
+						</form>
+					  </div>
+					</div>
+				</div>
+				<div class="modal fade" id="kapida" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+					  <div class="modal-content">
+						<div class="modal-header">
+						  <h5 class="modal-title"  id="exampleModalLabel" style="font-size:20px; text-align:center">Ödeme Yap</h5>
+						</div>
+						<div class="modal-body">
+						  <form action="" method="post">
+							<div class="form-group">
+							  <p id="odemetur-kapida" style="float:left; " > </p>  <p>yi &nbsp; Seçtiniz...</p>
+							</div>
+							<div class="form-group">
+							  <input type="text" class="form-control" name="kapida_ad_soyad" id="kapida_ad_soyad"  placeholder="Ad Soyad"/>
+							</div>
+							
+						  	<div class="form-group">
+							  <textarea  class="form-control" name="kapida_adres" id="kapida_adres" rows="6" placeholder="Adres"></textarea> 
+							</div>
+
+						</div>
+						
+						<div class="modal-footer">
+							
+						  	<button type="button" class="btn btn-secondary" id="kapida_vazgec"  data-dismiss="modal">Vazgeç</button>
+						  	<button type="submit" name="kapida_odeme_bitir" class="btn btn-primary">Ödemeyi Bitir</button>
+						</div>
+						</form>
+					  </div>
+					</div>
+				</div>
+				<div class="modal fade" id="sanalkart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+					  <div class="modal-content">
+						<div class="modal-header">
+						  <h5 class="modal-title"  id="exampleModalLabel" style="font-size:20px; text-align:center">Ödeme Yap</h5>
+						</div>
+						<div class="modal-body">
+						  <form action="" method="post">
+							<div class="form-group">
+							  <p id="odemetur-sanalkart" style="float:left; " > </p>  <p> &nbsp; İle Ödemeyi Seçtiniz...</p>
+							  
+							</div>
+							<div class="form-group">
+							  <input type="text" class="form-control" name="sanalkart_ad_soyad" id="sanalkart_ad_soyad"  placeholder="Ad Soyad"/>
+							</div>
+							
+							<div class="form-group">
+							  <input type="text" class="form-control" name="sanalkart_kart_numarası" id="sanalkart_kart_numarası"  onkeypress="return isNumberKey(event)" placeholder=" Sanal Kart Numarası "/>
+							</div>
+							
+						  	<div class="form-group">
+							  <textarea  class="form-control" name="sanalkart_adres" id="sanalkart_adres" rows="6" placeholder="Adres"></textarea> 
+							</div>
+
+						</div>
+						
+						<div class="modal-footer">
+							
+						  	<button type="button" class="btn btn-secondary"  id="sanalkart_vazgec" data-dismiss="modal">Vazgeç</button>
+						  	<button type="submit" name="sanalkart_odeme_bitir" class="btn btn-primary">Ödemeyi Bitir</button>
 						</div>
 						</form>
 					  </div>
