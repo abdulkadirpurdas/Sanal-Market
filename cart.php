@@ -1,5 +1,7 @@
+<?php ob_start(); ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +27,7 @@
 </head><!--/head-->
 <script type="text/javascript">
 	var geneltoplam=0;
-</script>>
+</script>
 <body>
 	<!--header kısmını çagırıyoruz-->
 	<?php require_once("header_kullanici.php"); ?>
@@ -60,8 +62,9 @@
 					<?php	
 						$a=0;
 						 $toplam=0;
-
+						  $son=""; 
 						 $x=0;
+						 
 						 foreach ($sepet as $key => $value)
 						 	{
 						 		$value['sepet_id'];
@@ -70,9 +73,10 @@
 					 			{
 
 					 			 $toplam= $toplam+$values['urun_fiyat']; 
+					 			 $son=$toplam;
 								}
 					  		}
-					  echo "<div id='gtop' hidden> ".$toplam."</div>"; 
+					  echo "<div id='gtop'  hidden> ".$toplam."</div>"; 
 					foreach ($sepet as $key => $value){ 
 						$value['sepet_id'];
 
@@ -117,10 +121,15 @@
 											 var geneltoplam=document.getElementById("gtop").innerHTML;
 											 
 											 geneltoplam=Number(document.getElementById("gtop").innerHTML)+Number(fiyat);
-											
+												
 											document.getElementById("gtop").innerHTML=geneltoplam;
 											 
 											document.getElementById("toplam").innerHTML=Number(geneltoplam)+".00 TL";
+											$son=Number(geneltoplam)+".00 TL";
+											document.getElementById("kapida_odeme_toplam").innerHTML=Number(geneltoplam)+".00 TL";
+											document.getElementById("kredikarti_odeme_toplam").innerHTML=Number(geneltoplam)+".00 TL";
+											document.getElementById("sanalkart_odeme_toplam").innerHTML=Number(geneltoplam)+".00 TL";
+											
 
 										}
 
@@ -138,6 +147,11 @@
 												  document.getElementById("gtop").innerHTML=geneltoplam;
 													 
 												  document.getElementById("toplam").innerHTML=Number(geneltoplam)+".00 TL";
+												 $son=Number(geneltoplam)+".00 TL";
+												document.getElementById("kapida_odeme_toplam").innerHTML=Number(geneltoplam)+".00 TL";
+												document.getElementById("kredikarti_odeme_toplam").innerHTML=Number(geneltoplam)+".00 TL";
+												document.getElementById("sanalkart_odeme_toplam").innerHTML=Number(geneltoplam)+".00 TL";
+
 											} 
 										}
 										
@@ -247,6 +261,7 @@
 						  <form action="" method="post">
 							<div class="form-group">
 							  <p id="odemetur-kredikart" style="float:left; " > </p>   <p>  &nbsp; İle Ödemeyi Seçtiniz...</p>
+							  <p id="kredikarti_odeme_toplam"> <?php echo $toplam ?> </p>
 							</div>
 							<div class="form-group">
 							  <input type="text" class="form-control" name="kredikarti_ad_soyad" id="kredikarti_ad_soyad"  placeholder="Kart Sahibinin Adı Soyad"/>
@@ -283,7 +298,7 @@
 						<div class="modal-footer">
 							
 						  	<button type="button" class="btn btn-secondary" id="kredikart_vazgec"   data-dismiss="modal">Vazgeç</button>
-						  	<button type="submit" name="kredikart_odeme_bitir" id="kredikart_odeme_bitir" class="btn btn-primary">Ödemeyi Bitir</button>
+						  	<button type="submit" name="kredikart_odeme_bitir" name="kredikart_odeme_bitir" class="btn btn-primary">Ödemeyi Bitir</button>
 						</div>
 						</form>
 					  </div>
@@ -296,9 +311,10 @@
 						  <h5 class="modal-title"  id="exampleModalLabel" style="font-size:20px; text-align:center">Ödeme Yap</h5>
 						</div>
 						<div class="modal-body">
-						  <form action="" method="post">
+						  <form action="" id="form_kapida" method="post">
 							<div class="form-group">
 							  <p id="odemetur-kapida" style="float:left; " > </p>  <p>yi &nbsp; Seçtiniz...</p>
+							  <p id="kapida_odeme_toplam"> <?php echo $toplam ?> </p>
 							</div>
 							<div class="form-group">
 							  <input type="text" class="form-control" name="kapida_ad_soyad" id="kapida_ad_soyad"  placeholder="Ad Soyad"/>
@@ -308,12 +324,12 @@
 							  <textarea  class="form-control" name="kapida_adres" id="kapida_adres" rows="6" placeholder="Adres"></textarea> 
 							</div>
 
-						</div>
+						</div>	
 						
 						<div class="modal-footer">
 							
 						  	<button type="button" class="btn btn-secondary" id="kapida_vazgec"  data-dismiss="modal">Vazgeç</button>
-						  	<button type="submit" name="kapida_odeme_bitir" class="btn btn-primary">Ödemeyi Bitir</button>
+						  	<button type="submit" name="kapida_odeme_bitir" name="kapida_odeme_bitir" class="btn btn-primary">Ödemeyi Bitir</button>
 						</div>
 						</form>
 					  </div>
@@ -329,7 +345,7 @@
 						  <form action="" method="post">
 							<div class="form-group">
 							  <p id="odemetur-sanalkart" style="float:left; " > </p>  <p> &nbsp; İle Ödemeyi Seçtiniz...</p>
-							  
+							  <p id="sanalkart_odeme_toplam"> <?php echo $toplam ?> </p>
 							</div>
 							<div class="form-group">
 							  <input type="text" class="form-control" name="sanalkart_ad_soyad" id="sanalkart_ad_soyad"  placeholder="Ad Soyad"/>
@@ -354,6 +370,63 @@
 					  </div>
 					</div>
 				</div>
+				
+					<?php
+							 if (isset($_POST['kapida_odeme_bitir'])) 
+							{
+								
+								$kisi=$_POST["kapida_ad_soyad"];
+								$adres=$_POST["kapida_adres"];
+								$odeme_tip="Kapıda Ödeme";
+								$ekle=$db->prepare("insert into odeme set  sepet_id=?,odeme_tutar=?,odeme_tip=?,odeme_adres=?,odeme_kisi=?");
+		                        $ekle->execute(array($_SESSION["id"],$son,$odeme_tip,$adres,$kisi));
+
+		                        $guncelle=$db->prepare("UPDATE sepet SET sepet_durum=? WHERE sepet_uyeid=?");
+		                        $guncelle->execute(array(1,$_SESSION["id"])); 
+		                        $hata = $ekle->errorInfo();
+		          				if(true){header ("Location:index_kullanici.php");} 
+		                    	
+							}
+
+							if (isset($_POST['kredikart_odeme_bitir'])) 
+							{
+								
+								$kisi=$_POST["kredikarti_ad_soyad"];
+								$adres=$_POST["kredikart_adres"];
+								$odeme_tip="Kredi Kartı";
+								$ekle=$db->prepare("insert into odeme set  sepet_id=?,odeme_tutar=?,odeme_tip=?,odeme_adres=?,odeme_kisi=?");
+		                        $ekle->execute(array($_SESSION["id"],$son,$odeme_tip,$adres,$kisi));
+
+		                        $guncelle=$db->prepare("UPDATE sepet SET sepet_durum=? WHERE sepet_uyeid=?");
+		                        $guncelle->execute(array(1,$_SESSION["id"])); 
+		                        $hata = $ekle->errorInfo();
+		          				if(true){header ("Location:index_kullanici.php");} 
+		                    	
+							}
+
+
+							 if (isset($_POST['sanalkart_odeme_bitir'])) 
+							{
+								
+								$kisi=$_POST["sanalkart_ad_soyad"];
+								$adres=$_POST["sanalkart_adres"];
+								$odeme_tip="sanalkart";
+								$ekle=$db->prepare("insert into odeme set  sepet_id=?,odeme_tutar=?,odeme_tip=?,odeme_adres=?,odeme_kisi=?");
+		                        $ekle->execute(array($_SESSION["id"],$son,$odeme_tip,$adres,$kisi));
+
+		                        $guncelle=$db->prepare("UPDATE sepet SET sepet_durum=? WHERE sepet_uyeid=?");
+		                        $guncelle->execute(array(1,$_SESSION["id"])); 
+		                        $hata = $ekle->errorInfo();
+		          				if(true){header ("Location:index_kullanici.php");} 
+		                    	
+							}
+					?>
+
+					
+			
+
+
+				
 	<!--footer kısmını çagırıyoruz-->
 	<?php require_once("footer.php"); ?>
 

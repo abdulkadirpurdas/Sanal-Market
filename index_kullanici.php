@@ -186,7 +186,7 @@
 												<h3><?php echo $value['urun_isim'];?></h3>
 												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>								
+												<a href="sepet.php?id=<?php echo $value['urun_id']; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>								
 											</div>
 											
 										</div>
@@ -222,7 +222,7 @@
 												<h3><?php echo $value['urun_isim'];?></h3>
 												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
+												<a href="sepet.php?id=<?php echo $value['urun_id']; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
 											</div>
 											
 										</div>
@@ -258,7 +258,7 @@
 												<h3><?php echo $value['urun_isim'];?></h3>
 												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
+												<a href="sepet.php?id=<?php echo $value['urun_id']; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
 											</div>
 											
 										</div>
@@ -293,7 +293,7 @@
 												<h3><?php echo $value['urun_isim'];?></h3>
 												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
+												<a href="sepet.php?id=<?php echo $value['urun_id']; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
 											</div>
 											
 										</div>
@@ -327,7 +327,7 @@
 												<h3><?php echo $value['urun_isim'];?></h3>
 												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
+												<a href="sepet.php?id=<?php echo $value['urun_id']; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
 											</div>
 											
 										</div>
@@ -373,7 +373,7 @@
 												<h3><?php echo $value['urun_isim'];?></h3>
 												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
+												<a href="sepet.php?id=<?php echo $value['urun_id']; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
 											</div>
 											
 										</div>
@@ -409,7 +409,7 @@
 												<h3><?php echo $value['urun_isim'];?></h3>
 												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
+												<a href="sepet.php?id=<?php echo $value['urun_id']; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
 											</div>
 											
 										</div>
@@ -445,7 +445,7 @@
 												<h3><?php echo $value['urun_isim'];?></h3>
 												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
+												<a href="sepet.php?id=<?php echo $value['urun_id']; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
 											</div>
 											
 										</div>
@@ -481,7 +481,7 @@
 												<h3><?php echo $value['urun_isim'];?></h3>
 												<?php echo "<a href='product-details_kullanici.php?id=".$a."' class='btn btn-default add-to-cart'>";?>
 												<i class="fa fa-shopping-cart"></i>Ürün Detay</a>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
+												<a href="sepet.php?id=<?php echo $value['urun_id']; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
 											</div>
 											
 										</div>
