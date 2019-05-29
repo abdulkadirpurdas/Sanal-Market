@@ -164,8 +164,8 @@
                     <br />
                 </div>
 
-         <ul id="menu" class="collapse">
-                
+        <ul id="menu" class="collapse">
+
                 <li class="panel">
                     <a href="index.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav">
                         ANASAYFA            
@@ -207,8 +207,8 @@
                         FİRMA BİLGİLERİ                                   
                     </a>
                     <ul class="collapse" id="blank-nav4">                        
-                        <li><a href="firma_bilgi.php"><i class="icon-angle-right"></i> FİRMA BİLGİSİ EKLE</a></li>
-                        <li><a href="blank2.html"><i class="icon-angle-right"></i> Blank Page Two  </a></li>
+                        <li><a href="firma_bilgi.php"><i class="icon-angle-right"></i>FİRMA BİLGİLERİ</a></li>
+                        <li><a href="firma_sube.php"><i class="icon-angle-right"></i>ŞUBE BİLGİLERİ</a></li>
                     </ul>
                 </li>
                 <!-- FİRMA BİTTİ -->
@@ -239,32 +239,23 @@
 
                 <!-- İNDİRİM İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav7">
+                    <a href="firma_indirim.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav7">
                         İNDİRİM İŞLEMLERİ                                     
-                    </a>
-                    <ul class="collapse" id="blank-nav7">                        
-                        <li><a href="blank.html"><i class="icon-angle-right"></i> Blank Page One  </a></li>
-                        <li><a href="blank2.html"><i class="icon-angle-right"></i> Blank Page Two  </a></li>
-                    </ul>
+                    </a>                   
                 </li>
                 <!-- İNDİRİM BİTTİ -->
 
                 <!-- MESAJ İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav8">
+                    <a href="firma_mailbox.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav8">
                         MESAJ İŞLEMLERİ                                     
                     </a>
-                    <ul class="collapse" id="blank-nav8">                        
-                        <li><a href="blank.html"><i class="icon-angle-right"></i> Blank Page One  </a></li>
-                        <li><a href="blank2.html"><i class="icon-angle-right"></i> Blank Page Two  </a></li>
-                    </ul>
                 </li>
                 <!-- MESAJ BİTTİ -->
 
                 <li><a href="cikis.php"><i class="icon-signin"></i> Login Page </a></li>
 
              </ul>
-
         </div>
         <!--END MENU SECTION -->
 

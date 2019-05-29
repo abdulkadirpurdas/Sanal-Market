@@ -1,5 +1,4 @@
 <?php  
-
 require_once("baglan.php");
   
 session_start();
@@ -11,8 +10,8 @@ session_start();
 		
 		if($_SESSION){
 			
-			 $id = $_POST["id"];
-			 $ben = $_SESSION["id"];
+			$id = $_POST["id"];
+			$ben = $_SESSION["id"];
 			  
 			$query = $db->prepare("select * from begeni where begenen_id = ? and begenilen_id = ?"); 
             $query->execute([$ben,$id]);			

@@ -70,15 +70,21 @@
 					</div>
 					<div class="col-sm-9">
 						<div class="shop-menu pull-right">
-							<ul class="nav navbar-nav">
-								
-								<li><a href="cart.php"><i class="fa fa-shopping-cart"></i> Sepet</a></li>
-								<li><a href="index.php"><i class="fa fa-crosshairs"></i> Çıkış Yap</a></li>
-								<li><a> <b> <?php echo $_SESSION["uye"]; ?></b></a></li>
-								
+							<ul class="nav navbar-nav">								
+								<li><a href="cart.php"><i class="fa fa-shopping-cart"></i> Sepetim</a></li>
+							</ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<div class="btn-group">
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									<b style="text-transform: capitalize;"> <?php echo $_SESSION["uye"]; ?></b>
+							<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="admin_kullanici/index.php"> Profilim</a></li><br>
+								<li><a href="index.php"> Çıkış Yap</a></li>
 							</ul>
-						</div>
-					</div>
+						</div>						
+						</div>						
+					</div>					
 				</div>
 			</div>
 		</div><!--/header-middle-->

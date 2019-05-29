@@ -166,7 +166,7 @@
                 </div>
 
          <ul id="menu" class="collapse">
-                
+
                 <li class="panel">
                     <a href="index.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav">
                         ANASAYFA            
@@ -208,7 +208,8 @@
                         FİRMA BİLGİLERİ                                   
                     </a>
                     <ul class="collapse" id="blank-nav4">                        
-                        <li><a href="firma_bilgi.php"><i class="icon-angle-right"></i>FİRMA BİLGİSİ EKLE  </a></li>
+                        <li><a href="firma_bilgi.php"><i class="icon-angle-right"></i>FİRMA BİLGİLERİ</a></li>
+                        <li><a href="firma_sube.php"><i class="icon-angle-right"></i>ŞUBE BİLGİLERİ</a></li>
                     </ul>
                 </li>
                 <!-- FİRMA BİTTİ -->
@@ -239,13 +240,9 @@
 
                 <!-- İNDİRİM İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav7">
+                    <a href="firma_indirim.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav7">
                         İNDİRİM İŞLEMLERİ                                     
-                    </a>
-                    <ul class="collapse" id="blank-nav7">                        
-                        <li><a href="blank.html"><i class="icon-angle-right"></i> Blank Page One  </a></li>
-                        <li><a href="blank2.html"><i class="icon-angle-right"></i> Blank Page Two  </a></li>
-                    </ul>
+                    </a>                   
                 </li>
                 <!-- İNDİRİM BİTTİ -->
 
@@ -270,14 +267,14 @@
             <div class="inner" style="min-height:1200px;">
 
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 text-center">
                         <h3>ÜRÜN İŞLEMLERİNE HOŞGELDİNİZ</h3>
                     </div>
                 </div>
                 <hr /> 
 
                 <!--ÜRÜN EKLEME MODAL -->            
-                <a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#uiModal">ÜRÜN ADD</a><hr /> 
+                <a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#uiModal">Ürün Ekle</a><hr /> 
                 <div class="modal fade" id="uiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -485,11 +482,12 @@
                                             <td><?php echo $row['urun_kategori'] ?></td>
                                             <td><?php echo $row['urun_fiyat'] ?></td>
                                             <td><?php echo $row['urun_stok'] ?></td>
-                                            <td class="center">                                          
-                                                <button class="btn btn-inverse" data-toggle="modal" data-target="#<?php echo $a; ?>"></i> Update</button></a>                              
+                                            <td class="center">   
+                                                <button class="btn btn-inverse" data-toggle="modal" data-target="#<?php echo $a; ?>"> 
+                                                Update</button>                              
                                             </td>
                                             <td class="center">
-                                                <?php echo "<a href='function.php?id=".$a."'onclick='return confirmDel();'>";?>
+                                                <?php echo "<a href='urun_sil.php?id=".$a."'onclick='return confirmDel();'>";?>
                                                 <p type="submit" name="urun_delete" class="btn btn-danger">Delete</p></a>
                                             </td>                                                                                    
                                         </tr> 
@@ -590,8 +588,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
-                                    <button type="submit" name="urun_update" class="btn btn-primary">Kaydet</button>
-                                    <?php echo $a; ?>
+                                    <button type="submit" name="urun_update" class="btn btn-primary">Kaydet</button>                        
                                 </div>
                                 </form>
                             </div>
@@ -601,71 +598,71 @@
 
 
                 <!-- PHP ÜRÜN GÜNCELLEME KOD -->
-<?php 
-    if(isset($_POST['urun_update']))
-       {   
-            $urun_isim = $_POST["urun_isim"];
-            @$urun_kategori = $_POST["urun_altkategori"];
-            $urun_stok = $_POST["urun_stok"];
-            $urun_fiyat = $_POST["urun_fiyat"];                       
-            $urun_aciklama = $_POST["urun_aciklama"];
-            $urun_tarif = $_POST["urun_tarif"];  
-            @$urun_resim = $_POST["urun_resim"];
-                        
-                if($_FILES){
-                    $maxSize = 7000000;
-                    $dosyaUzantisi = substr($_FILES["urun_resim"]["name"],-4,4);
-                    $dosyaAdi      = rand(1,999999).$dosyaUzantisi;
-                    $dosyaYolu     = "upload/".$dosyaAdi;    
+                <?php 
+                    if(isset($_POST['urun_update']))
+                       {   
+                            $urun_isim = $_POST["urun_isim"];
+                            @$urun_kategori = $_POST["urun_altkategori"];
+                            $urun_stok = $_POST["urun_stok"];
+                            $urun_fiyat = $_POST["urun_fiyat"];                       
+                            $urun_aciklama = $_POST["urun_aciklama"];
+                            $urun_tarif = $_POST["urun_tarif"];  
+                            @$urun_resim = $_POST["urun_resim"];
+                                        
+                                if($_FILES){
+                                    $maxSize = 7000000;
+                                    $dosyaUzantisi = substr($_FILES["urun_resim"]["name"],-4,4);
+                                    $dosyaAdi      = rand(1,999999).$dosyaUzantisi;
+                                    $dosyaYolu     = "upload/".$dosyaAdi;    
+                                             
+                                        if($_FILES["urun_resim"]["size"]> $maxSize){
+                                                                
+                                            echo '<div class="alert alert-warning">dosya boyutu 700 kb dan buyuk olamaz..</div>';
+                                                                
+                                                }
+                                                    else{
+                                                                
+                                                            $dosya = $_FILES["urun_resim"]["type"];
+                                                                    
+                                                                    if($dosya == "image/jpeg" || $dosya == "image/png" || $dosya == "image/gif"){
+                                                                            
+                                                                        if(is_uploaded_file($_FILES["urun_resim"]["tmp_name"])){
                              
-                        if($_FILES["urun_resim"]["size"]> $maxSize){
-                                                
-                            echo '<div class="alert alert-warning">dosya boyutu 700 kb dan buyuk olamaz..</div>';
-                                                
-                                }
-                                    else{
-                                                
-                                            $dosya = $_FILES["urun_resim"]["type"];
-                                                    
-                                                    if($dosya == "image/jpeg" || $dosya == "image/png" || $dosya == "image/gif"){
-                                                            
-                                                        if(is_uploaded_file($_FILES["urun_resim"]["tmp_name"])){
-             
-                                                        @unlink($row["urun_resim"]);
+                                                                        @unlink($row["urun_resim"]);
 
-                                                        $ok = move_uploaded_file($_FILES["urun_resim"]["tmp_name"],$dosyaYolu);
-                                                        
-                                                        if($ok){
-                                                        
-                                                        $urun_resim = $dosyaYolu;
-                                                            
-                                                        }else {
-                                                            
-                                                        echo '<div class="alert alert-warning">dosya tasınamadı...</div>';
+                                                                        $ok = move_uploaded_file($_FILES["urun_resim"]["tmp_name"],$dosyaYolu);
+                                                                        
+                                                                        if($ok){
+                                                                        
+                                                                        $urun_resim = $dosyaYolu;
+                                                                            
+                                                                        }else {
+                                                                            
+                                                                        echo '<div class="alert alert-warning">dosya tasınamadı...</div>';
 
-                                                            
-                                                        }
+                                                                            
+                                                                        }
+                                                                                
+                                                                            }else{
+                                                                                
+                                                                                 echo '<div class="alert alert-warning">dosya yuklenemedi..</div>';
+                                                                            }
+                                                                                                                 
+                                                                            
+                                                                        }else{
+                                                                            
+                                                                            echo '<div class="alert alert-warning">dosya formati sadece resim olmalıdır...</div>';
+                                                                            
+                                                                        }                                      
                                                                 
-                                                            }else{
-                                                                
-                                                                 echo '<div class="alert alert-warning">dosya yuklenemedi..</div>';
                                                             }
-                                                                                                 
-                                                            
-                                                        }else{
-                                                            
-                                                            echo '<div class="alert alert-warning">dosya formati sadece resim olmalıdır...</div>';
-                                                            
-                                                        }                                      
-                                                
-                                            }
-                             
-                        }
-        $guncelle=$db->prepare("UPDATE urun SET urun_isim=?,urun_kategori=?,urun_stok=?,urun_fiyat=?,urun_resim=?,urun_aciklama=?,urun_tarif=? WHERE urun_id=?");
-        $guncelle->execute(array($urun_isim,$urun_kategori,$urun_stok,$urun_fiyat,$urun_resim,$urun_aciklama,$urun_tarif,$a)); 
-    }
-?>
-<!-- PHP ÜRÜN GÜNCELLEME -->
+                                             
+                                        }
+                        $guncelle=$db->prepare("UPDATE urun SET urun_isim=?,urun_kategori=?,urun_stok=?,urun_fiyat=?,urun_resim=?,urun_aciklama=?,urun_tarif=? WHERE urun_id=?");
+                        $guncelle->execute(array($urun_isim,$urun_kategori,$urun_stok,$urun_fiyat,$urun_resim,$urun_aciklama,$urun_tarif,$a)); 
+                    }
+                ?>
+                <!-- PHP ÜRÜN GÜNCELLEME -->
 
         </div>
         </div>

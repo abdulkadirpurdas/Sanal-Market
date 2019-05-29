@@ -1,18 +1,18 @@
-﻿<?php require_once("../baglan.php"); ?>
+<?php require_once("../baglan.php"); ?>
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="tr"> <!--<![endif]-->
-<!-- BEGIN HEAD -->
+<html>
+  <!-- BEGIN HEAD-->
 <head>
+   
     <meta charset="UTF-8" />
-    <title>SANAL | MARKET </title>
-     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-	<meta content="" name="description" />
-	<meta content="" name="author" />
+    <title>SANAL | MARKET</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
      <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
+    <!-- GLOBAL STYLES -->
     <!-- GLOBAL STYLES -->
     <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
@@ -22,33 +22,27 @@
     <!--END GLOBAL STYLES -->
 
     <!-- PAGE LEVEL STYLES -->
-    <link href="assets/css/layout2.css" rel="stylesheet" />
-       <link href="assets/plugins/flot/examples/examples.css" rel="stylesheet" />
-       <link rel="stylesheet" href="assets/plugins/timeline/timeline.css" />
+  
+    <!-- PAGE LEVEL STYLES -->
     <!-- END PAGE LEVEL  STYLES -->
-     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+       <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 </head>
-
-    <!-- END HEAD -->
-
-    <!-- BEGIN BODY -->
-<body class="padTop53 " >
+    <!-- END  HEAD-->
+  <body class="padTop53 " >
     <?php session_start(); ?>
     <?php 
         if($_SESSION){               
-        	$uye=$_SESSION["uye"]; 
-        	$eposta=$_SESSION["eposta"];        
+            $eposta=$_SESSION["eposta"];
+            $b=$_SESSION["id"];                    
         }
-    ?>  
-    <!-- MAIN WRAPPER -->
-    <div id="wrap" >
-        
-
-        <!-- HEADER SECTION -->
+    ?> 
+    <div id="wrap">
+      
+     <!-- HEADER SECTION -->
         <div id="top">
 
             <nav class="navbar navbar-inverse navbar-fixed-top " style="padding-top: 10px;">
@@ -59,14 +53,12 @@
                 <header class="navbar-header">
 
                     <a href="index.php" class="navbar-brand">
-                    <img src="assets/img/logo.png" alt="" />
-                        
-                        </a>
+                    <img src="assets/img/logo.png" alt="" /></a>
                 </header>
                 <!-- END LOGO SECTION -->
                 <ul class="nav navbar-top-links navbar-right">
 
-                    <!-- MESSAGES SECTION -->
+                        <!-- MESSAGES SECTION -->
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <span class="label label-success">2</span><i class="icon-envelope-alt"></i>&nbsp; <i class="icon-chevron-down"></i>
@@ -83,7 +75,7 @@
                                         $a=$row['mesaj_id']; 
                                 ?>
 
-                                <?php echo "<a href='admin_read_mail.php?id=".$a."'>";?>
+                                <?php echo "<a href='kullanici_read_mail.php?id=".$a."'>";?>
                                     <div>
                                         <span class="pull-right text-muted">
                                         <em><?php echo $row['mesaj_tarih'] ?></em>
@@ -103,7 +95,7 @@
                             
                             <li class="divider"></li>
                             <li>
-                                <a class="text-center" href="admin_bildirim.php">
+                                <a class="text-center" href="kullanici_bildirim.php">
                                     <strong>Tümünü Oku</strong>
                                     <i class="icon-angle-right"></i>
                                 </a>
@@ -112,7 +104,7 @@
 
                     </li>
                     <!--END MESSAGES SECTION -->
-                                  
+
 
                     <!--ADMIN SETTINGS SECTIONS -->
 
@@ -121,11 +113,14 @@
                             <i class="icon-user "></i>&nbsp; <i class="icon-chevron-down "></i>
                         </a>
 
-                        <ul class="dropdown-menu dropdown-user">                          
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#"><i class="icon-user"></i> User Profile </a>
+                            </li>                          
                             <li class="divider"></li>
-                            <li><a href="cikis.php"><i class="icon-signout"></i> Çıkış </a>
+                            <li><a href="cikis.php"><i class="icon-signout"></i> Logout </a>
                             </li>
                         </ul>
+
                     </li>
                     <!--END ADMIN SETTINGS -->
                 </ul>
@@ -136,8 +131,7 @@
         <!-- END HEADER SECTION -->
 
 
-        
-        <!-- MENU SECTION -->
+ <!-- MENU SECTION -->
        <div id="left" >
             <div class="media user-media well-small">
                 <a class="user-link" href="#">
@@ -148,7 +142,7 @@
                     <h5 class="media-heading" style="font-weight: inherit; text-transform: capitalize; font-size: 16px;">
                         <?php 
                         if($_SESSION){               
-                            echo $uye;                                
+                            echo $_SESSION["uye"];                                             
                         }
                         ?>  
                     </h5>
@@ -170,38 +164,35 @@
                     </a>               
                 </li>
 
-                <!-- FİRMA CRUD İŞLEMLERİ KISMI -->
+                <!-- SANALKART İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="admin_firma.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav1">
-                        FİRMA İŞLEMLERİ            
+                    <a href="" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav1">
+                        SANALKART İŞLEMLERİ            
                     </a>               
                 </li>
-                <!-- FİRMA CRUD BİTTİ -->
+                <!-- SANALKART BİTTİ -->
 
-                <!-- MÜŞTERİ CRUD İŞLEMLERİ KISMI -->
+                <!-- SİPARİŞ İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="admin_kullanıcı.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
-                        MÜŞTERİ İŞLEMLERİ                                     
+                    <a href="" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
+                        SİPARİŞ İŞLEMLERİ                                     
                     </a>                   
                 </li>
-                <!-- MÜŞTERİ CRUD BİTTİ -->
+                <!-- SİPARİŞ BİTTİ -->
 
-
-                <!-- ADMİN ONAY İŞLEMLERİ KISMI -->
+                 <!-- FAVORİ MARKETLERİM İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="admin_onay.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav3">
-                        ONAY İŞLEMLERİ                                     
-                    </a>
-                    <ul class="collapse" id="blank-nav2">                        
-                        <li><a href="blank.html"><i class="icon-angle-right"></i> Blank Page One  </a></li>
-                        <li><a href="blank2.html"><i class="icon-angle-right"></i> Blank Page Two  </a></li>
-                    </ul>
+                    <a href="kullanici_favori.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
+                        FAVORİ MARKETLERİM                                     
+                    </a>                   
                 </li>
-                <!-- ADMİN ONAY  BİTTİ -->
+                <!-- FAVORİ MARKETLERİM BİTTİ -->
+
+               
 
                 <!-- MESAJ İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="admin_mailbox.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav4">
+                    <a href="kullanici_mailbox.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav4">
                         MESAJ İŞLEMLERİ                                     
                     </a>             
                 </li>
@@ -227,104 +218,106 @@
         <!--END MENU SECTION -->
 
 
-
         <!--PAGE CONTENT -->
-        <div id="content">  
-            <div class="inner" style="min-height: 700px;">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1> Admin Dashboard </h1>
-                    </div>
+        <div id="content">
+        <div class="inner" style="min-height:700px;">
+
+        <!-- Right side column. Contains the navbar and content of the page -->
+        <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h3>SİPARİŞ İŞLEMLERİ</h3>
+          <hr />
+        </section>
+        <!--BLOCK SECTION -->
+        <div class="row">
+            <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center" style="font-size: 20px;">
+                            SİPARİŞ İŞLEMLERİ
+                        </div> 
+                    </div>                
+                    <?php    
+                    $fiyat=0;                        
+                        $veri= $db->query("SELECT * FROM odeme where odeme_durum=1  ", PDO::FETCH_ASSOC);            
+                            foreach($veri as $row){  
+                               $sepet_id=$row['sepet_id'];
+
+                               $sepet= $db->query("SELECT * FROM sepet where sepet_uyeid='$sepet_id' ", PDO::FETCH_ASSOC);
+                               $kisi=$db->query("SELECT * FROM uye where uye_id='$sepet_id' ", PDO::FETCH_ASSOC);
+                              foreach ($kisi as $key => $val) { }
+                    ?>
+
+                    <div class="col-lg-4">                        
+                        <div class="panel panel-default">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                <div class="panel panel-default">
+                                    
+                                    <div class="panel-heading">
+                                        <b>Sipariş Veren:</b> <?php echo $val['uye_adsoyad']; ?>
+                                       
+                                    </div>
+                                    <div class="panel-body">
+                                    <?php 
+                                        foreach ($sepet as $key => $value) {
+                               $sepet_urun_id=$value['sepet_urunid']; 
+                               $fiyat=$fiyat+$value['sepet_urunfiyat'];
+                               $urun_adet=$value['sepet_urunadet'];
+                               $urun_fiyat=$value['sepet_urunfiyat'];
+                               $urun=$db->query("SELECT * FROM urun where urun_id='$sepet_urun_id' ", PDO::FETCH_ASSOC);
+                               foreach ($urun as $key => $values) {
+                                  $urun_isim=$values['urun_isim'];
+                                  
+                               }
+                                    ?>
+                                       <p style="float:left;"> <?php echo $urun_isim; ?> &nbsp; &nbsp; &nbsp; 
+                                       <?php echo $urun_adet;?> Adet &nbsp; &nbsp; &nbsp;
+                                        <?php echo $urun_fiyat;?> TL </p>
+                                        
+                                        
+
+                                  <?php } ?>
+                                  <br><br><br>
+                                        <b style="float:right;"> Toplam : <?php echo  $fiyat; ?> TL </b> 
+                                    </div>
+                                   
+                                    <div class="panel-footer">
+                                       <a type="submit"  href="firma_siparis_onay.php?id=<?php echo $sepet_id; ?>"name="btn_siparis_onay" class="btn btn-primary btn-sm">Sipariş Onay</a>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                        </div>                                                                                              
+                    </div>                          
+                    <?php
+                    }
+                    
+                    ?>                                               
+                                                              
                 </div>
-                  <hr />
-
-                 <!--BLOCK SECTION -->
-                 <div class="row">
-                    <div class="col-lg-12">
-                        <div style="text-align: center;">
-                           
-                            <a class="quick-btn" href="#">
-                                <i class="icon-check icon-2x"></i>
-                                <span> Products</span>
-                                <span class="label label-danger">2</span>
-                            </a>
-
-                            <a class="quick-btn" href="#">
-                                <i class="icon-envelope icon-2x"></i>
-                                <span>Messages</span>
-                                <span class="label label-success">456</span>
-                            </a>
-                            <a class="quick-btn" href="#">
-                                <i class="icon-signal icon-2x"></i>
-                                <span>Profit</span>
-                                <span class="label label-warning">+25</span>
-                            </a>
-                            <a class="quick-btn" href="#">
-                                <i class="icon-external-link icon-2x"></i>
-                                <span>value</span>
-                                <span class="label btn-metis-2">3.14159265</span>
-                            </a>
-                            <a class="quick-btn" href="#">
-                                <i class="icon-lemon icon-2x"></i>
-                                <span>tasks</span>
-                                <span class="label btn-metis-4">107</span>
-                            </a>
-                            <a class="quick-btn" href="#">
-                                <i class="icon-bolt icon-2x"></i>
-                                <span>Tickets</span>
-                                <span class="label label-default">20</span>
-                            </a>
- 
-                        </div>
-                    </div>
-                </div>
-                  <!--END BLOCK SECTION -->
-                <hr />
-             
-            </div>
         </div>
-        <!--END PAGE CONTENT -->
+        <!--END BLOCK SECTION -->
+        
+        </div><!-- /.content-wrapper -->
 
-         <!-- RIGHT STRIP  SECTION -->
-        <div id="right">
-            <div class="well well-small">
-                <ul class="list-unstyled">
-                    <li>Visitor &nbsp; : <span>23,000</span></li>
-                    <li>Users &nbsp; : <span>53,000</span></li>
-                    <li>Registrations &nbsp; : <span>3,000</span></li>
-                </ul>
-            </div>
-
+        </div >
         </div>
-         <!-- END RIGHT STRIP  SECTION -->
-    </div>
+      <!--END PAGE CONTENT -->
 
-    <!--END MAIN WRAPPER -->
+      </div>
+     <!--END MAIN WRAPPER -->
 
-    <!-- FOOTER -->
+      <!-- FOOTER -->
     <div id="footer">
         <p>&copy;  binarytheme &nbsp;2014 &nbsp;</p>
     </div>
     <!--END FOOTER -->
 
-
-    <!-- GLOBAL SCRIPTS -->
+     <!-- GLOBAL SCRIPTS -->
     <script src="assets/plugins/jquery-2.0.3.min.js"></script>
-     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <!-- END GLOBAL SCRIPTS -->
-
-    <!-- PAGE LEVEL SCRIPTS -->
-    <script src="assets/plugins/flot/jquery.flot.js"></script>
-    <script src="assets/plugins/flot/jquery.flot.resize.js"></script>
-    <script src="assets/plugins/flot/jquery.flot.time.js"></script>
-     <script  src="assets/plugins/flot/jquery.flot.stack.js"></script>
-    <script src="assets/js/for_index.js"></script>
-   
-    <!-- END PAGE LEVEL SCRIPTS -->
-
-
-</body>
-
-    <!-- END BODY -->
+  
+  </body>
 </html>

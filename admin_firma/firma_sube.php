@@ -1,15 +1,15 @@
-﻿<?php require_once("../baglan.php"); ?>
+<?php require_once("../baglan.php"); ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="tr"> <!--<![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="UTF-8" />
     <title>SANAL | MARKET </title>
-     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-	<meta content="" name="description" />
-	<meta content="" name="author" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
      <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
@@ -23,14 +23,19 @@
 
     <!-- PAGE LEVEL STYLES -->
     <link href="assets/css/layout2.css" rel="stylesheet" />
-       <link href="assets/plugins/flot/examples/examples.css" rel="stylesheet" />
-       <link rel="stylesheet" href="assets/plugins/timeline/timeline.css" />
+    <link href="assets/plugins/flot/examples/examples.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/plugins/timeline/timeline.css" />
+    <link href="assets/plugins/jquery-steps-master/demo/css/jquery.steps.css" rel="stylesheet" /> 
+    <link rel="stylesheet" href="assets/css/bootstrap-fileupload.min.css" />
     <!-- END PAGE LEVEL  STYLES -->
      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+
+    <script src="assets/js/jquery.min.js"></script>
+
 </head>
 
     <!-- END HEAD -->
@@ -39,9 +44,10 @@
 <body class="padTop53 " >
     <?php session_start(); ?>
     <?php 
-        if($_SESSION){               
-        	$uye=$_SESSION["uye"]; 
-        	$eposta=$_SESSION["eposta"];        
+        if($_SESSION){     
+            $id=$_SESSION["id"];          
+            $uye=$_SESSION["uye"]; 
+            $eposta=$_SESSION["eposta"];        
         }
     ?>  
     <!-- MAIN WRAPPER -->
@@ -83,7 +89,7 @@
                                         $a=$row['mesaj_id']; 
                                 ?>
 
-                                <?php echo "<a href='admin_read_mail.php?id=".$a."'>";?>
+                                <?php echo "<a href='firma_read_mail.php?id=".$a."'>";?>
                                     <div>
                                         <span class="pull-right text-muted">
                                         <em><?php echo $row['mesaj_tarih'] ?></em>
@@ -103,17 +109,16 @@
                             
                             <li class="divider"></li>
                             <li>
-                                <a class="text-center" href="admin_bildirim.php">
+                                <a class="text-center" href="firma_bildirim.php">
                                     <strong>Tümünü Oku</strong>
                                     <i class="icon-angle-right"></i>
                                 </a>
                             </li>
                         </ul>
-
                     </li>
                     <!--END MESSAGES SECTION -->
-                                  
 
+                    
                     <!--ADMIN SETTINGS SECTIONS -->
 
                     <li class="dropdown">
@@ -121,11 +126,14 @@
                             <i class="icon-user "></i>&nbsp; <i class="icon-chevron-down "></i>
                         </a>
 
-                        <ul class="dropdown-menu dropdown-user">                          
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#"><i class="icon-user"></i> User Profile </a>
+                            </li>
                             <li class="divider"></li>
-                            <li><a href="cikis.php"><i class="icon-signout"></i> Çıkış </a>
+                            <li><a href="cikis.php"><i class="icon-signout"></i> Logout </a>
                             </li>
                         </ul>
+
                     </li>
                     <!--END ADMIN SETTINGS -->
                 </ul>
@@ -148,7 +156,7 @@
                     <h5 class="media-heading" style="font-weight: inherit; text-transform: capitalize; font-size: 16px;">
                         <?php 
                         if($_SESSION){               
-                            echo $uye;                                
+                            echo $uye; 
                         }
                         ?>  
                     </h5>
@@ -166,46 +174,50 @@
 
                 <li class="panel">
                     <a href="index.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav">
-                        ANASAYFA          
+                        ANASAYFA            
                     </a>               
                 </li>
 
                 <!-- FİRMA CRUD İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="admin_firma.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav1">
-                        FİRMA İŞLEMLERİ            
+                    <a href="firma_ürün.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav1">
+                        ÜRÜN İŞLEMLERİ            
                     </a>               
                 </li>
                 <!-- FİRMA CRUD BİTTİ -->
 
-                <!-- MÜŞTERİ CRUD İŞLEMLERİ KISMI -->
+                <!-- KATEGORİ CRUD İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="admin_kullanıcı.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
-                        MÜŞTERİ İŞLEMLERİ                                     
+                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
+                        KATEGORİ İŞLEMLERİ                                     
                     </a>                   
                 </li>
-                <!-- MÜŞTERİ CRUD BİTTİ -->
+                <!-- KATEGORİ CRUD BİTTİ -->
 
 
-                <!-- ADMİN ONAY İŞLEMLERİ KISMI -->
+                <!-- SİPARİŞ İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="admin_onay.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav3">
-                        ONAY İŞLEMLERİ                                     
+                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav3">
+                        SİPARİŞ İŞLEMLERİ                                     
                     </a>
-                    <ul class="collapse" id="blank-nav2">                        
+                    <ul class="collapse" id="blank-nav3">                        
                         <li><a href="blank.html"><i class="icon-angle-right"></i> Blank Page One  </a></li>
                         <li><a href="blank2.html"><i class="icon-angle-right"></i> Blank Page Two  </a></li>
                     </ul>
                 </li>
-                <!-- ADMİN ONAY  BİTTİ -->
+                <!-- SİPARİŞ  BİTTİ -->
 
-                <!-- MESAJ İŞLEMLERİ KISMI -->
+                <!-- FİRMA İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="admin_mailbox.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav4">
-                        MESAJ İŞLEMLERİ                                     
-                    </a>             
+                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav4">
+                        FİRMA BİLGİLERİ                                   
+                    </a>
+                    <ul class="collapse" id="blank-nav4">                        
+                        <li><a href="firma_bilgi.php"><i class="icon-angle-right"></i>FİRMA BİLGİLERİ</a></li>
+                        <li><a href="firma_sube.php"><i class="icon-angle-right"></i>ŞUBE BİLGİLERİ</a></li>
+                    </ul>
                 </li>
-                <!-- MESAJ BİTTİ -->
+                <!-- FİRMA BİTTİ -->
 
                 <!-- İSTATİSTİKLER İŞLEMLERİ KISMI -->
                 <li class="panel">
@@ -218,6 +230,34 @@
                     </ul>
                 </li>
                 <!-- İSTATİSTİKLER BİTTİ -->
+
+                <!-- SANALKART İŞLEMLERİ KISMI -->
+                <li class="panel">
+                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav6">
+                        SANALKART İŞLEMLERİ                                     
+                    </a>
+                    <ul class="collapse" id="blank-nav6">                        
+                        <li><a href="blank.html"><i class="icon-angle-right"></i> Blank Page One  </a></li>
+                        <li><a href="blank2.html"><i class="icon-angle-right"></i> Blank Page Two  </a></li>
+                    </ul>
+                </li>
+                <!-- SANALKART BİTTİ -->
+
+                <!-- İNDİRİM İŞLEMLERİ KISMI -->
+                <li class="panel">
+                    <a href="firma_indirim.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav7">
+                        İNDİRİM İŞLEMLERİ                                     
+                    </a>                   
+                </li>
+                <!-- İNDİRİM BİTTİ -->
+
+                <!-- MESAJ İŞLEMLERİ KISMI -->
+                <li class="panel">
+                    <a href="firma_mailbox.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav8">
+                        MESAJ İŞLEMLERİ                                     
+                    </a>
+                </li>
+                <!-- MESAJ BİTTİ -->
 
                 <li><a href="cikis.php"><i class="icon-signin"></i> Login Page </a></li>
 
@@ -232,58 +272,75 @@
         <div id="content">  
             <div class="inner" style="min-height: 700px;">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h1> Admin Dashboard </h1>
+                    <div class="col-lg-12 text-center">
+                        <h3> ŞUBE BİLGİLERİNE HOŞGELDİNİZ </h3>
                     </div>
                 </div>
-                  <hr />
-
-                 <!--BLOCK SECTION -->
-                 <div class="row">
-                    <div class="col-lg-12">
-                        <div style="text-align: center;">
-                           
-                            <a class="quick-btn" href="#">
-                                <i class="icon-check icon-2x"></i>
-                                <span> Products</span>
-                                <span class="label label-danger">2</span>
-                            </a>
-
-                            <a class="quick-btn" href="#">
-                                <i class="icon-envelope icon-2x"></i>
-                                <span>Messages</span>
-                                <span class="label label-success">456</span>
-                            </a>
-                            <a class="quick-btn" href="#">
-                                <i class="icon-signal icon-2x"></i>
-                                <span>Profit</span>
-                                <span class="label label-warning">+25</span>
-                            </a>
-                            <a class="quick-btn" href="#">
-                                <i class="icon-external-link icon-2x"></i>
-                                <span>value</span>
-                                <span class="label btn-metis-2">3.14159265</span>
-                            </a>
-                            <a class="quick-btn" href="#">
-                                <i class="icon-lemon icon-2x"></i>
-                                <span>tasks</span>
-                                <span class="label btn-metis-4">107</span>
-                            </a>
-                            <a class="quick-btn" href="#">
-                                <i class="icon-bolt icon-2x"></i>
-                                <span>Tickets</span>
-                                <span class="label label-default">20</span>
-                            </a>
- 
-                        </div>
-                    </div>
-                </div>
-                  <!--END BLOCK SECTION -->
                 <hr />
-             
+
+
+            <script language="javascript">
+                function confirmDel() {
+                    var agree=confirm("Bu içeriği silmek istediğinizden emin misiniz?\nBu işlem geri alınamaz!");
+                    if (agree) {
+                        return true ; 
+                    }
+                    else {
+                        return false ;
+                    }
+                }
+            </script>
+
+            <!--BLOCK SECTION -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>         
+                                        <th>ŞUBE İSİM</th>                                 
+                                        <th>ŞUBE HAKKINDA</th>
+                                        <th>ŞUBE İLETİŞİM</th>
+                                        <th>SİL</th>                                                                         
+                                    </tr>
+                                </thead>
+                                    
+                                <tbody>
+                                <?php                               
+                                    $veri= $db->query("SELECT * FROM sube where sube_yetkili ='$id'", PDO::FETCH_ASSOC);            
+                                        foreach($veri as $row){  
+                                            $row['sube_id']; 
+                                            $a=$row['sube_id'];                                    
+                                ?>
+                                <tr>
+                                    <td><?php echo $row['sube_isim'] ?></td>
+                                    <td><?php echo $row['sube_hakkinda'] ?></td>
+                                    <td><?php echo $row['sube_iletisim'] ?></td>                                    
+                                    <td class="center">
+                                    <?php echo "<a href='sube_sil.php?id=".$a."'onclick='return confirmDel();'>";?>
+                                    <p type="submit" name="urun_delete" class="btn btn-danger">Delete</p></a>
+                                    </td>                                  
+                                </tr>                                 
+                                <?php
+                                }
+                                ?>                                      
+                                </tbody>                                                 
+                            </table>
+                             <img src="<?php echo $row['sube_reyon'] ?>" style="width: 100%; height: 350px;"> 
+                        </div>                      
+                    </div>
+                    </div>
+                    <a href="firma_reyon.php" style="float: right;">Reyon sayfasına İlerle</a>
+                    
+                </div>
+            </div>
+            <!--END BLOCK SECTION --> 
+
             </div>
         </div>
-        <!--END PAGE CONTENT -->
+     <!--END PAGE CONTENT -->
 
          <!-- RIGHT STRIP  SECTION -->
         <div id="right">
@@ -315,12 +372,10 @@
     <!-- END GLOBAL SCRIPTS -->
 
     <!-- PAGE LEVEL SCRIPTS -->
-    <script src="assets/plugins/flot/jquery.flot.js"></script>
-    <script src="assets/plugins/flot/jquery.flot.resize.js"></script>
-    <script src="assets/plugins/flot/jquery.flot.time.js"></script>
-     <script  src="assets/plugins/flot/jquery.flot.stack.js"></script>
-    <script src="assets/js/for_index.js"></script>
-   
+    <script src="assets/plugins/jquery-steps-master/lib/jquery.cookie-1.3.1.js"></script>
+    <script src="assets/plugins/jquery-steps-master/build/jquery.steps.js"></script>   
+    <script src="assets/js/WizardInit.js"></script> 
+    <script src="assets/plugins/jasny/js/bootstrap-fileupload.js"></script>
     <!-- END PAGE LEVEL SCRIPTS -->
 
 

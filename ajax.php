@@ -15,6 +15,14 @@
  		}
     
 ?>
+ <?php 
+        $ilid=$_POST['il3'];
+ 		$ilcelist= $db->query("select * from muh_ilceler  where il_id='".$ilid."'")->fetchAll(PDO::FETCH_ASSOC);
+ 		foreach ($ilcelist as $key => $value) {
+ 			echo '<option value="'.$value['id'].'"> '.$value['baslik'].' </option>';
+ 		}
+    
+?>
 <?php
     	$kategoriid=$_POST['ustkategori'];
  		$kategorilist= $db->query("select * from kategori  where kategori_ust='".$kategoriid."'")->fetchAll(PDO::FETCH_ASSOC);
@@ -32,4 +40,4 @@
  		}
 
 ?>
- 
+

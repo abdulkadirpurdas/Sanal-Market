@@ -13,8 +13,8 @@ if (!isset($id)) {
 		$c=" ";
 	foreach ($urun_bilgi as $key => $value_urun){ }
 	
-	$ekle=$db->prepare("insert into sepet  set sepet_urunid=?,sepet_urunadet=?,sepet_uyeid=?,sepet_durum=?,sepet_urunfiyat=?,sepet_adres=?");
-                        $ekle->execute(array($value_urun["urun_id"],$a,$uye_id,$b,$value_urun["urun_fiyat"],$c));
+	$ekle=$db->prepare("insert into sepet  set sepet_urunid=?,sepet_urunadet=?,sepet_uyeid=?,sepet_durum=?,sepet_urunfiyat=?,sepet_adres=?,sepet_urun_firma=?");
+                        $ekle->execute(array($value_urun["urun_id"],$a,$uye_id,$b,$value_urun["urun_fiyat"],$c,$value_urun["urun_firma"]));
 	header("location:index_kullanici.php");	
 
 

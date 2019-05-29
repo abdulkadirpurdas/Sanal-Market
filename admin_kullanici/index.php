@@ -39,7 +39,8 @@
 <body class="padTop53 " >
     <?php session_start(); ?>
     <?php 
-        if($_SESSION){               
+        if($_SESSION){ 
+            $id=$_SESSION["id"];              
             $uye=$_SESSION["uye"]; 
             $eposta=$_SESSION["eposta"];        
         }
@@ -185,7 +186,7 @@
 
                 <!-- SİPARİŞ İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
+                    <a href="kullanici_siparis.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
                         SİPARİŞ İŞLEMLERİ                                     
                     </a>                   
                 </li>
@@ -287,16 +288,114 @@
         </div>
         <!--END PAGE CONTENT -->
 
-         <!-- RIGHT STRIP  SECTION -->
+        <!-- RIGHT STRIP  SECTION -->
         <div id="right">
             <div class="well well-small">
                 <ul class="list-unstyled">
                     <li>Visitor &nbsp; : <span>23,000</span></li>
                     <li>Users &nbsp; : <span>53,000</span></li>
                     <li>Registrations &nbsp; : <span>3,000</span></li>
+                    <li><a href="#" data-toggle="modal" data-target="#formModal"><i class="icon-gear"></i> Ayarlar </a></li>
+                    <?php                               
+                        $veri= $db->query("SELECT * FROM uye where uye_id='$id'", PDO::FETCH_ASSOC);
+                            foreach($veri as $row){  
+                                $row['uye_id'];                        
+                    ?>
+                    <!-- bilgi düzenle modal -->
+                    <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header text-center">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="H2">Bilgilerini Düzenle</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form role="form" action="" method="post">
+                                        <div class="form-group">
+                                            <input class="form-control" name="uye_eposta" maxlength="50" id="message-text1"  
+                                            placeholder="E-mail" value="<?php echo $row['uye_eposta']; ?>" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input class="form-control" type="password" name="uye_sifre" maxlength="50" id="message-text2"  placeholder="Şifre" value="<?php echo $row['uye_sifre']; ?>" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input class="form-control" name="uye_telefon" maxlength="11" id="message-text3" 
+                                            onkeypress="return isNumberKey(event)" placeholder="Telefon(05xxxxxxxxx)" 
+                                            value="<?php echo $row['uye_telefon']; ?>"/>
+                                            <script type="text/javascript">
+                                                 function isNumberKey(evt) {
+                                                    var charCode = (evt.which) ? evt.which : event.keyCode;
+                                                    if (charCode > 31 && (charCode < 48 || charCode > 57))
+                                                        return false;
+                                                    return true;
+                                                }
+                                            </script>            
+                                        </div> 
+
+                                        <script src="../js/jquery-3.4.0.min.js"  type="text/javascript"></script>
+                                        <div class="form-group">
+                                            <?php $illist = $db->query("SELECT * FROM muh_iller")->fetchAll(PDO::FETCH_ASSOC); ?>
+                                            <select id="il" name="uye_il" class="form-control" required>
+                                                <option> İl Seçiniz</option>
+                                                <?php                                                   
+                                                    foreach ($illist as $key => $value) {
+                                                    echo '<option value="'.$value['id'].'">'.$value['baslik'].'</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <select id="ilce" name="uye_ilce" class="form-control" required>
+                                                <script type="text/javascript"> 
+                                                    $(document).ready(function(){                           
+                                                        $("#il").change(function(){
+                                                            var ilid=$(this).val();
+                                                            $.ajax({
+                                                                type:"POST",
+                                                                url:"../ajax.php",
+                                                                data:{"il3":ilid},
+                                                                success:function(e){                       
+                                                                    $("#ilce").html(e);
+                                                                }
+                                                            });
+                                                        })
+                                                    });
+                                                </script>
+                                            </select>
+                                        </div>                                  
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                                    <button type="submit" name="btn_düzenle" class="btn btn-primary">Verileri Kaydet</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    }
+                    ?>      
+                    <!-- bilgi düzenle modal bitti -->
+
+                    <!-- PHP bilgi GÜNCELLEME KOD -->
+                    <?php 
+                        if(isset($_POST['btn_düzenle'])){   
+                            $uye_eposta = $_POST["uye_eposta"];
+                            $uye_sifre = $_POST["uye_sifre"];
+                            $uye_telefon = $_POST["uye_telefon"];
+                            $uye_il = $_POST["uye_il"];
+                            $uye_ilce = $_POST["uye_ilce"];
+                
+                            $guncelle=$db->prepare("UPDATE uye SET uye_eposta=?,uye_sifre=?,uye_telefon=?,uye_il=?,uye_ilce=? WHERE uye_id=?");
+                            $guncelle->execute(array($uye_eposta,$uye_sifre,$uye_telefon,$uye_il,$uye_ilce,$id));
+                        }                      
+                    ?>
+                    <!-- PHP bilgi GÜNCELLEME -->
                 </ul>
             </div>
-
         </div>
          <!-- END RIGHT STRIP  SECTION -->
     </div>

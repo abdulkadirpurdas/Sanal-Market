@@ -1,18 +1,18 @@
 <?php require_once("../baglan.php"); ?>
 <!DOCTYPE html>
-<html>
-  <!-- BEGIN HEAD-->
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="tr"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
 <head>
-   
     <meta charset="UTF-8" />
-    <title>SANAL | MARKET</title>
+    <title>SANAL | MARKET </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
      <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-    <!-- GLOBAL STYLES -->
     <!-- GLOBAL STYLES -->
     <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
@@ -22,34 +22,38 @@
     <!--END GLOBAL STYLES -->
 
     <!-- PAGE LEVEL STYLES -->
-    <!-- Font Awesome Icons -->
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- Ionicons -->
-    <link href="assets/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-    <!-- iCheck -->
-    <link href="assets/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/layout2.css" rel="stylesheet" />
+    <link href="assets/plugins/flot/examples/examples.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/plugins/timeline/timeline.css" />
+    <link href="assets/plugins/jquery-steps-master/demo/css/jquery.steps.css" rel="stylesheet" /> 
+    <link rel="stylesheet" href="assets/css/bootstrap-fileupload.min.css" />
     <!-- END PAGE LEVEL  STYLES -->
-
-    <!-- PAGE LEVEL STYLES -->
-    <!-- END PAGE LEVEL  STYLES -->
-       <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+
+    <script src="assets/js/jquery.min.js"></script>
 </head>
-    <!-- END  HEAD-->
-  <body class="padTop53 " >
+
+    <!-- END HEAD -->
+
+    <!-- BEGIN BODY -->
+<body class="padTop53 " >
     <?php session_start(); ?>
     <?php 
-        if($_SESSION){               
+        if($_SESSION){     
+            $id=$_SESSION["id"];          
             $uye=$_SESSION["uye"]; 
             $eposta=$_SESSION["eposta"];        
         }
-    ?>
-    <div id="wrap">
-      
-     <!-- HEADER SECTION -->
+    ?>  
+    <!-- MAIN WRAPPER -->
+    <div id="wrap" >
+        
+
+        <!-- HEADER SECTION -->
         <div id="top">
 
             <nav class="navbar navbar-inverse navbar-fixed-top " style="padding-top: 10px;">
@@ -60,7 +64,9 @@
                 <header class="navbar-header">
 
                     <a href="index.php" class="navbar-brand">
-                    <img src="assets/img/logo.png" alt="" /></a>
+                    <img src="assets/img/logo.png" alt="" />
+                        
+                        </a>
                 </header>
                 <!-- END LOGO SECTION -->
                 <ul class="nav navbar-top-links navbar-right">
@@ -111,7 +117,7 @@
                     </li>
                     <!--END MESSAGES SECTION -->
 
-                   
+                    
                     <!--ADMIN SETTINGS SECTIONS -->
 
                     <li class="dropdown">
@@ -121,7 +127,7 @@
 
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="#"><i class="icon-user"></i> User Profile </a>
-                            </li>                          
+                            </li>
                             <li class="divider"></li>
                             <li><a href="cikis.php"><i class="icon-signout"></i> Logout </a>
                             </li>
@@ -137,7 +143,8 @@
         <!-- END HEADER SECTION -->
 
 
- <!-- MENU SECTION -->
+        
+        <!-- MENU SECTION -->
        <div id="left" >
             <div class="media user-media well-small">
                 <a class="user-link" href="#">
@@ -148,7 +155,7 @@
                     <h5 class="media-heading" style="font-weight: inherit; text-transform: capitalize; font-size: 16px;">
                         <?php 
                         if($_SESSION){               
-                            echo $uye;                    
+                            echo $uye; 
                         }
                         ?>  
                     </h5>
@@ -162,7 +169,7 @@
                 <br />
             </div>
 
-            <ul id="menu" class="collapse">
+           <ul id="menu" class="collapse">
 
                 <li class="panel">
                     <a href="index.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav">
@@ -255,207 +262,162 @@
 
              </ul>
 
-
         </div>
         <!--END MENU SECTION -->
 
 
+
         <!--PAGE CONTENT -->
-        <div id="content">
-        <div class="inner" style="min-height:700px;">
-
-        <!-- Right side column. Contains the navbar and content of the page -->
-        <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h3>MESAJ İŞLEMLERİNE HOŞGELDİNİZ</h3>
-          <hr />
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-          <div class="row">
-            <div class="col-md-2">
-              <a href="admin_compose.php" class="btn btn-primary btn-block margin-bottom">Mesaj Yaz</a>
-              <div class="box box-solid">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Klasörler</h3>
-                </div>
-                <div class="box-body no-padding">
-                  <ul class="nav nav-pills nav-stacked">
-                    <li><a href="firma_mailbox.php"><i class="fa fa-inbox"></i> Gelen Kutusu <span class="label label-primary pull-right"></span></a></li>
-                    <li class="active"><a href="firma_send_mail.php"><i class="fa fa-envelope-o"></i> Gönderilen</a></li>
-                    <li><a href="#"><i class="fa fa-file-text-o"></i> Taslaklar</a></li>
-                    <li><a href="#"><i class="fa fa-filter"></i> Önemsiz <span class="label label-waring pull-right"></span></a></li>
-                    <li><a href="#"><i class="fa fa-trash-o"></i> Çöp</a></li>
-                  </ul>
-                </div><!-- /.box-body -->
-              </div><!-- /. box -->
-            </div><!-- /.col -->
-
-            <div class="col-md-10">
-              <div class="box box-primary">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Gönderilen</h3>
-                  <div class="box-tools pull-right">
-                    <div class="has-feedback">
-                      <input type="text" class="form-control input-sm" placeholder="Search Mail"/>
+        <div id="content">  
+            <div class="inner" style="min-height: 800px;">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h3> ŞUBE EKLEME İŞLEMİNE HOŞGELDİNİZ </h3>
                     </div>
-                  </div><!-- /.box-tools -->
-                </div><!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <div class="mailbox-controls">
-                    <!-- Check all button -->
-                    <button class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>
-                    <div class="btn-group">
-                      <button class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                    </div><!-- /.btn-group -->
-                    <button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>                   
-                  </div>
-                  <div class="table-responsive mailbox-messages">
-                    <table class="table table-hover table-striped">                    
-                        <tbody>
-                        <?php  
-                            $veri = $db->prepare("SELECT * FROM mesaj where mesaj_gonderen='$eposta'"); 
-                            $veri ->execute();
-                                if($veri->rowCount()){                           
-                                foreach($veri as $row){  
-                                    $row['mesaj_id'];
-                                    $a=$row['mesaj_id'];                                            
-                        ?>
-                        <?php 
-                            $icerik =$row['mesaj_icerik']; 
-                            // Yazının karakter sayısı. 
-                            $uzunluk = strlen($icerik); 
-                            // Sınırlandıralacak sayı. 
-                            $sinir = 28; 
-                            // Yazının uzunluğunun sınırdan büyük olup olmadığını kontrol et. 
-                            if ($uzunluk > $sinir) { 
-                            // Eğer büyükse Devamını Oku yazısını ekle. 
-                            $yazdır = substr($icerik,0,$sinir); 
-                            } 
-                            // İçeriği ekrana yazdır. 
-                            $yazdır; 
-                        ?>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-star"><i class="fa fa-star text-yellow"></i></td>
-                           
-                          <td class="mailbox-name">
-                            <?php echo "<a href='firma_read_mail.php?id=".$a."'>";?>
-                            <?php echo $uye; ?></a>
-                          </td>
-                          <td class="mailbox-subject"><b><?php echo $row['mesaj_konu']; ?></b> - <?php echo $yazdır; ?>...</td>
-                          <td class="mailbox-date"><?php echo $row['mesaj_tarih']; ?></td>
-                        </tr> 
-                        <?php
-                        }
-                        }
-                        ?>                        
-                        </tbody>
-                    </table><!-- /.table -->
-                  </div><!-- /.mail-box-messages -->
-                </div><!-- /.box-body -->
-                <div class="box-footer no-padding">
-                  <div class="mailbox-controls">
-                    <!-- Check all button -->
-                    <button class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>                    
-                    <div class="btn-group">
-                      <button class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                    </div><!-- /.btn-group -->
-                    <button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                    <div class="pull-right">
-                      1-50/200
-                      <div class="btn-group">
-                        <button class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                        <button class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                      </div><!-- /.btn-group -->
-                    </div><!-- /.pull-right -->
-                  </div>
                 </div>
-              </div><!-- /. box -->
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </section><!-- /.content -->
-      </div><!-- /.content-wrapper -->
+                <hr />
 
-      </div >
-      </div>
-      <!--END PAGE CONTENT -->
+            <!--BLOCK SECTION -->
+            <div class="row">
+                <div class="col-lg-10">
+                    <form action="" method="post" enctype="multipart/form-data"> 
+                        <label for="text1" class="control-label col-lg-4">Şube İsim</label>
+                        <div class="col-lg-8">
+                            <input type="text" id="text1" name="sube_isim" class="form-control" required/><br>
+                        </div>
+                        <label class="control-label col-lg-4">Şube Reyon</label>
+                        <div class="col-lg-8">
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="assets/img/demoUpload.jpg" alt="" /></div>
+                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                <div>
+                                    <span class="btn btn-file btn-primary"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="sube_reyon" id="sube_reyon" required/></span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                </div>
+                            </div>
+                        </div>                                           
+                        <label for="limiter" class="control-label col-lg-4" >Şube Hakkında</label><br>
+                        <div class="col-lg-8">
+                            <textarea id="limiter" name="sube_hakkinda" class="form-control" rows="8" required></textarea><br>
+                        </div>
+                        <label for="limiter1" class="control-label col-lg-4">Şube İletişim</label><br>
+                        <div class="col-lg-8">
+                            <textarea id="limiter1" name="sube_iletisim" class="form-control" rows="8" required></textarea><br>
+                        </div>                                                       
+                        <button type="submit" name="btn_sube" class="btn btn-primary pull-right" style="margin-right: 15px;">Kaydet</button>
+                    </form>                                                      
+                </div>
+            </div>   
 
-      </div>
-     <!--END MAIN WRAPPER -->
+            <!-- şube ekleme kod -->  
+            <?php                     
+                    if(isset($_POST['btn_sube'])){
+                        $sube_isim=$_POST["sube_isim"];
+                        $sube_hakkinda = $_POST["sube_hakkinda"];
+                        $sube_iletisim = $_POST["sube_iletisim"];
+                        $sube_yetkili = $id;
+                        @$sube_reyon = $_POST["sube_reyon"];                   
+                        
+                            if($_FILES){
+                             
+                                $maxSize = 7000000;
+                                $dosyaUzantisi = substr($_FILES["sube_reyon"]["name"],-4,4);
+                                $dosyaAdi      = rand(1,999999).$dosyaUzantisi;
+                                $dosyaYolu     = "upload/".$dosyaAdi; 
+                              
+                             
+                                if($_FILES["sube_reyon"]["size"]> $maxSize){
+                                                
+                                    echo '<div class="alert alert-warning">dosya boyutu 700 kb dan buyuk olamaz..</div>';
+                                                                   
+                                    }
+                                    else{
+                                                
+                                            $dosya = $_FILES["sube_reyon"]["type"];
+                                                    
+                                                    if($dosya == "image/jpeg" || $dosya == "image/png" || $dosya == "image/gif"){
+                                                            
+                                                        if(is_uploaded_file($_FILES["sube_reyon"]["tmp_name"])){
+             
+                                                        
+                                                        $ok = move_uploaded_file($_FILES["sube_reyon"]["tmp_name"],$dosyaYolu);
+                                                        
+                                                        if($ok){
+                                                        
+                                                        $sube_reyon = $dosyaYolu;
+                                                            
+                                                        }else {
+                                                            
+                                                        echo '<div class="alert alert-warning">dosya tasınamadı...</div>';
 
-      <!-- FOOTER -->
+                                                            
+                                                        }
+                                                                
+                                                            }else{
+                                                                
+                                                                 echo '<div class="alert alert-warning">dosya yuklenemedi..</div>';
+                                                            }
+                                                                                                 
+                                                            
+                                                        }else{
+                                                            
+                                                            echo '<div class="alert alert-warning">dosya formati sadece resim olmalıdır...</div>';
+                                                            
+                                                        }                                      
+                                                
+                                            }
+                             
+                         }
+                        
+                        $ekle=$db->prepare("insert into sube set sube_isim=?,sube_reyon=?,sube_hakkinda=?,sube_iletisim=?,sube_yetkili=?");
+                        $ekle->execute(array($sube_isim,$sube_reyon,$sube_hakkinda,$sube_iletisim,$sube_yetkili));                   
+                    }
+                ?>
+            <!-- şube ekleme kod bitti -->
+            </div>
+            <!--END BLOCK SECTION --> 
+
+        </div>
+     <!--END PAGE CONTENT -->
+
+        <!-- RIGHT STRIP  SECTION -->
+        <div id="right">
+            <div class="well well-small">
+                <ul class="list-unstyled">
+                    <li>Visitor &nbsp; : <span>23,000</span></li>
+                    <li>Users &nbsp; : <span>53,000</span></li>
+                    <li>Registrations &nbsp; : <span>3,000</span></li>
+                </ul>
+            </div>
+
+        </div>
+         <!-- END RIGHT STRIP  SECTION -->
+    </div>
+
+    <!--END MAIN WRAPPER -->
+
+    <!-- FOOTER -->
     <div id="footer">
         <p>&copy;  binarytheme &nbsp;2014 &nbsp;</p>
     </div>
     <!--END FOOTER -->
 
-     <!-- GLOBAL SCRIPTS -->
+
+    <!-- GLOBAL SCRIPTS -->
     <script src="assets/plugins/jquery-2.0.3.min.js"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <!-- END GLOBAL SCRIPTS -->
 
     <!-- PAGE LEVEL SCRIPTS -->
-    <!-- jQuery 2.1.3 -->
-    <script src="assets/plugins/jQuery/jQuery-2.1.3.min.js"></script>
-    <!-- Bootstrap 3.3.2 JS -->
-    <script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- Slimscroll -->
-    <script src="assets/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <!-- FastClick -->
-    <script src='assets/plugins/fastclick/fastclick.min.js'></script>
-    <!-- iCheck -->
-    <script src="assets/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-    <!-- Page Script -->
-    <script>
-      $(function () {
-        //Enable iCheck plugin for checkboxes
-        //iCheck for checkbox and radio inputs
-        $('input[type="checkbox"]').iCheck({
-          checkboxClass: 'icheckbox_flat-blue',
-          radioClass: 'iradio_flat-blue'
-        });
+    <script src="assets/plugins/jquery-steps-master/lib/jquery.cookie-1.3.1.js"></script>
+    <script src="assets/plugins/jquery-steps-master/build/jquery.steps.js"></script>   
+    <script src="assets/js/WizardInit.js"></script> 
+    <script src="assets/plugins/jasny/js/bootstrap-fileupload.js"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
 
-        //Enable check and uncheck all functionality
-        $(".checkbox-toggle").click(function () {
-          var clicks = $(this).data('clicks');
-          if (clicks) {
-            //Uncheck all checkboxes
-            $("input[type='checkbox']", ".mailbox-messages").iCheck("uncheck");
-          } else {
-            //Check all checkboxes
-            $("input[type='checkbox']", ".mailbox-messages").iCheck("check");
-          }
-          $(this).data("clicks", !clicks);
-        });
 
-        //Handle starring for glyphicon and font awesome
-        $(".mailbox-star").click(function (e) {
-          e.preventDefault();
-          //detect type
-          var $this = $(this).find("a > i");
-          var glyph = $this.hasClass("glyphicon");
-          var fa = $this.hasClass("fa");          
+</body>
 
-          //Switch states
-          if (glyph) {
-            $this.toggleClass("glyphicon-star");
-            $this.toggleClass("glyphicon-star-empty");
-          }
-
-          if (fa) {
-            $this.toggleClass("fa-star");
-            $this.toggleClass("fa-star-o");
-          }
-        });
-      });
-    </script>
-  </body>
+    <!-- END BODY -->
 </html>

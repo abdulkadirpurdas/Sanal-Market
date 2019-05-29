@@ -209,7 +209,7 @@
 
                 <!-- KATEGORİ CRUD İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
+                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
                         KATEGORİ İŞLEMLERİ                                     
                     </a>                   
                 </li>
@@ -218,7 +218,7 @@
 
                 <!-- SİPARİŞ İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav3">
+                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav3">
                         SİPARİŞ İŞLEMLERİ                                     
                     </a>
                     <ul class="collapse" id="blank-nav3">                        
@@ -234,7 +234,8 @@
                         FİRMA BİLGİLERİ                                   
                     </a>
                     <ul class="collapse" id="blank-nav4">                        
-                        <li><a href="firma_bilgi.php"><i class="icon-angle-right"></i>FİRMA BİLGİSİ EKLE  </a></li>
+                        <li><a href="firma_bilgi.php"><i class="icon-angle-right"></i>FİRMA BİLGİLERİ</a></li>
+                        <li><a href="firma_sube.php"><i class="icon-angle-right"></i>ŞUBE BİLGİLERİ</a></li>
                     </ul>
                 </li>
                 <!-- FİRMA BİTTİ -->
@@ -265,13 +266,9 @@
 
                 <!-- İNDİRİM İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav7">
+                    <a href="firma_indirim.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav7">
                         İNDİRİM İŞLEMLERİ                                     
-                    </a>
-                    <ul class="collapse" id="blank-nav7">                        
-                        <li><a href="blank.html"><i class="icon-angle-right"></i> Blank Page One  </a></li>
-                        <li><a href="blank2.html"><i class="icon-angle-right"></i> Blank Page Two  </a></li>
-                    </ul>
+                    </a>                   
                 </li>
                 <!-- İNDİRİM BİTTİ -->
 
@@ -296,7 +293,7 @@
         <div id="content">  
             <div class="inner" style="min-height: 700px;">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 text-center">
                         <h3> FİRMA BİLGİLERİNE HOŞGELDİNİZ </h3>
                     </div>
                 </div>

@@ -1,14 +1,17 @@
 <?php require_once("../baglan.php"); ?>
 <!DOCTYPE html>
-<html>
-  <!-- BEGIN HEAD-->
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="tr"> <!--<![endif]-->
+
+<!-- BEGIN HEAD-->
 <head>
    
     <meta charset="UTF-8" />
     <title>SANAL | MARKET</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="" name="description" />
-    <meta content="" name="author" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
      <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
@@ -22,12 +25,21 @@
     <!--END GLOBAL STYLES -->
 
     <!-- PAGE LEVEL STYLES -->
-    <!-- Font Awesome Icons -->
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- Ionicons -->
-    <link href="assets/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-    <!-- iCheck -->
-    <link href="assets/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="assets/css/jquery.multi-draggable.css">
+    <link rel="stylesheet" href="assets/css/mdrag-ex.css">
+    <style type="text/css">
+        #box1 {
+            width:400px;
+            height:300px;
+            border-style: solid;
+            border-width: 2px;
+        }
+        canvas {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
     <!-- END PAGE LEVEL  STYLES -->
 
     <!-- PAGE LEVEL STYLES -->
@@ -39,17 +51,21 @@
     <![endif]-->
 </head>
     <!-- END  HEAD-->
-  <body class="padTop53 " >
+    <!-- BEGIN BODY-->
+<body class="padTop53 " >
     <?php session_start(); ?>
     <?php 
         if($_SESSION){               
             $uye=$_SESSION["uye"]; 
-            $eposta=$_SESSION["eposta"];        
+            $eposta=$_SESSION["eposta"];
+            $b= $_SESSION["firma"];         
         }
-    ?>
+    ?>  
+     <!-- MAIN WRAPPER -->
     <div id="wrap">
-      
-     <!-- HEADER SECTION -->
+
+
+         <!-- HEADER SECTION -->
         <div id="top">
 
             <nav class="navbar navbar-inverse navbar-fixed-top " style="padding-top: 10px;">
@@ -110,8 +126,8 @@
                         </ul>
                     </li>
                     <!--END MESSAGES SECTION -->
-
                    
+
                     <!--ADMIN SETTINGS SECTIONS -->
 
                     <li class="dropdown">
@@ -137,32 +153,33 @@
         <!-- END HEADER SECTION -->
 
 
- <!-- MENU SECTION -->
-       <div id="left" >
-            <div class="media user-media well-small">
-                <a class="user-link" href="#">
-                    <img class="media-object img-thumbnail user-img" alt="User Picture" src="assets/img/user.gif" />
-                </a>
-                <br />
-                <div class="media-body">
-                    <h5 class="media-heading" style="font-weight: inherit; text-transform: capitalize; font-size: 16px;">
-                        <?php 
-                        if($_SESSION){               
-                            echo $uye;                    
-                        }
-                        ?>  
-                    </h5>
-                    <ul class="list-unstyled user-info">                      
-                        <li>
-                             <a class="btn btn-success btn-xs btn-circle" style="width: 10px;height: 12px;"></a> Online
-                           
-                        </li>
-                    </ul>
-                </div>
-                <br />
-            </div>
 
-            <ul id="menu" class="collapse">
+        <!-- MENU SECTION -->
+       <div id="left">
+                <div class="media user-media well-small">
+                    <a class="user-link" href="#">
+                        <img class="media-object img-thumbnail user-img" alt="User Picture" src="assets/img/user.gif" />
+                    </a>
+                    <br />
+                    <div class="media-body">
+                        <h5 class="media-heading" style="font-weight: inherit; text-transform: capitalize; font-size: 16px;">
+                            <?php 
+                            if($_SESSION){               
+                                echo $uye;                                    
+                            }
+                            ?>  
+                        </h5>
+                        <ul class="list-unstyled user-info">                      
+                            <li>
+                                 <a class="btn btn-success btn-xs btn-circle" style="width: 10px;height: 12px;"></a> Online
+                               
+                            </li>
+                        </ul>
+                    </div>
+                    <br />
+                </div>
+
+         <ul id="menu" class="collapse">
 
                 <li class="panel">
                     <a href="index.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav">
@@ -255,207 +272,91 @@
 
              </ul>
 
-
         </div>
         <!--END MENU SECTION -->
 
 
         <!--PAGE CONTENT -->
         <div id="content">
-        <div class="inner" style="min-height:700px;">
+            <div class="inner" style="min-height:700px;">
 
-        <!-- Right side column. Contains the navbar and content of the page -->
-        <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h3>MESAJ İŞLEMLERİNE HOŞGELDİNİZ</h3>
-          <hr />
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-          <div class="row">
-            <div class="col-md-2">
-              <a href="admin_compose.php" class="btn btn-primary btn-block margin-bottom">Mesaj Yaz</a>
-              <div class="box box-solid">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Klasörler</h3>
-                </div>
-                <div class="box-body no-padding">
-                  <ul class="nav nav-pills nav-stacked">
-                    <li><a href="firma_mailbox.php"><i class="fa fa-inbox"></i> Gelen Kutusu <span class="label label-primary pull-right"></span></a></li>
-                    <li class="active"><a href="firma_send_mail.php"><i class="fa fa-envelope-o"></i> Gönderilen</a></li>
-                    <li><a href="#"><i class="fa fa-file-text-o"></i> Taslaklar</a></li>
-                    <li><a href="#"><i class="fa fa-filter"></i> Önemsiz <span class="label label-waring pull-right"></span></a></li>
-                    <li><a href="#"><i class="fa fa-trash-o"></i> Çöp</a></li>
-                  </ul>
-                </div><!-- /.box-body -->
-              </div><!-- /. box -->
-            </div><!-- /.col -->
-
-            <div class="col-md-10">
-              <div class="box box-primary">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Gönderilen</h3>
-                  <div class="box-tools pull-right">
-                    <div class="has-feedback">
-                      <input type="text" class="form-control input-sm" placeholder="Search Mail"/>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h3>REYON OLUŞTURMA İŞLEMLERİNE HOŞGELDİNİZ</h3>
                     </div>
-                  </div><!-- /.box-tools -->
-                </div><!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <div class="mailbox-controls">
-                    <!-- Check all button -->
-                    <button class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>
-                    <div class="btn-group">
-                      <button class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                    </div><!-- /.btn-group -->
-                    <button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>                   
-                  </div>
-                  <div class="table-responsive mailbox-messages">
-                    <table class="table table-hover table-striped">                    
-                        <tbody>
-                        <?php  
-                            $veri = $db->prepare("SELECT * FROM mesaj where mesaj_gonderen='$eposta'"); 
-                            $veri ->execute();
-                                if($veri->rowCount()){                           
-                                foreach($veri as $row){  
-                                    $row['mesaj_id'];
-                                    $a=$row['mesaj_id'];                                            
+                </div>
+                <hr /> 
+
+                <div id="text">
+                <div class="part">
+                    <div id="c1" class="container">
+                        <div class="drag">Giris</div>
+                        <div class="drag">Çıkış</div>
+                        <div class="drag">Kasalar</div>
+                         <?php 
+                              $veri= $db->query("SELECT * FROM kategori where kategori_ust='0'", PDO::FETCH_ASSOC);            
+                                  foreach($veri as $row){  
+                                    $row['kategori_id'];                               
                         ?>
-                        <?php 
-                            $icerik =$row['mesaj_icerik']; 
-                            // Yazının karakter sayısı. 
-                            $uzunluk = strlen($icerik); 
-                            // Sınırlandıralacak sayı. 
-                            $sinir = 28; 
-                            // Yazının uzunluğunun sınırdan büyük olup olmadığını kontrol et. 
-                            if ($uzunluk > $sinir) { 
-                            // Eğer büyükse Devamını Oku yazısını ekle. 
-                            $yazdır = substr($icerik,0,$sinir); 
-                            } 
-                            // İçeriği ekrana yazdır. 
-                            $yazdır; 
-                        ?>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-star"><i class="fa fa-star text-yellow"></i></td>
-                           
-                          <td class="mailbox-name">
-                            <?php echo "<a href='firma_read_mail.php?id=".$a."'>";?>
-                            <?php echo $uye; ?></a>
-                          </td>
-                          <td class="mailbox-subject"><b><?php echo $row['mesaj_konu']; ?></b> - <?php echo $yazdır; ?>...</td>
-                          <td class="mailbox-date"><?php echo $row['mesaj_tarih']; ?></td>
-                        </tr> 
+                        <div class="drag"><?php echo $row['kategori_isim'] ?></div>
                         <?php
                         }
-                        }
-                        ?>                        
-                        </tbody>
-                    </table><!-- /.table -->
-                  </div><!-- /.mail-box-messages -->
-                </div><!-- /.box-body -->
-                <div class="box-footer no-padding">
-                  <div class="mailbox-controls">
-                    <!-- Check all button -->
-                    <button class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>                    
-                    <div class="btn-group">
-                      <button class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                    </div><!-- /.btn-group -->
-                    <button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                    <div class="pull-right">
-                      1-50/200
-                      <div class="btn-group">
-                        <button class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                        <button class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                      </div><!-- /.btn-group -->
-                    </div><!-- /.pull-right -->
-                  </div>
+                        ?>                     
+                    </div>                  
+                </div>  
                 </div>
-              </div><!-- /. box -->
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </section><!-- /.content -->
-      </div><!-- /.content-wrapper -->
 
-      </div >
-      </div>
-      <!--END PAGE CONTENT -->
+                <a href="javascript:genScreenshot()"> Ekran Görüntüsü Al</a>
+                <a id="test"></a>
+                <div id="canvas" style="display:none;"></div>
+                <script type="text/javascript">
+                    function genScreenshot() {
+                        html2canvas(document.body, {
+                          onrendered: function(canvas) {
+                          $('#box1').html("");
+                                $('#box1').append(canvas);
+                          
+                          if (navigator.userAgent.indexOf("MSIE ") > 0 || 
+                                        navigator.userAgent.match(/Trident.*rv\:11\./)) 
+                                {
+                            var blob = canvas.msToBlob();
+                            window.navigator.msSaveBlob(blob,'Test file.png');
+                          }
+                          else {
+                            $('#test').attr('href', canvas.toDataURL("image/png"));
+                            $('#test').attr('download','Test file.png');
+                            $('#test')[0].click();
+                          }                      
+                          }
+                        });
+                    }
+                </script>
+               <a href="firma_sube_olustur.php" style="float: right;">İşleme Devam Et</a>
 
-      </div>
+            </div>
+        </div>
+        <!--END PAGE CONTENT -->
+    </div>
      <!--END MAIN WRAPPER -->
 
-      <!-- FOOTER -->
+   <!-- FOOTER -->
     <div id="footer">
         <p>&copy;  binarytheme &nbsp;2014 &nbsp;</p>
     </div>
     <!--END FOOTER -->
 
-     <!-- GLOBAL SCRIPTS -->
+    <!-- GLOBAL SCRIPTS -->
     <script src="assets/plugins/jquery-2.0.3.min.js"></script>
     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <!-- END GLOBAL SCRIPTS -->
-
     <!-- PAGE LEVEL SCRIPTS -->
-    <!-- jQuery 2.1.3 -->
-    <script src="assets/plugins/jQuery/jQuery-2.1.3.min.js"></script>
-    <!-- Bootstrap 3.3.2 JS -->
-    <script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- Slimscroll -->
-    <script src="assets/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <!-- FastClick -->
-    <script src='assets/plugins/fastclick/fastclick.min.js'></script>
-    <!-- iCheck -->
-    <script src="assets/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-    <!-- Page Script -->
-    <script>
-      $(function () {
-        //Enable iCheck plugin for checkboxes
-        //iCheck for checkbox and radio inputs
-        $('input[type="checkbox"]').iCheck({
-          checkboxClass: 'icheckbox_flat-blue',
-          radioClass: 'iradio_flat-blue'
-        });
-
-        //Enable check and uncheck all functionality
-        $(".checkbox-toggle").click(function () {
-          var clicks = $(this).data('clicks');
-          if (clicks) {
-            //Uncheck all checkboxes
-            $("input[type='checkbox']", ".mailbox-messages").iCheck("uncheck");
-          } else {
-            //Check all checkboxes
-            $("input[type='checkbox']", ".mailbox-messages").iCheck("check");
-          }
-          $(this).data("clicks", !clicks);
-        });
-
-        //Handle starring for glyphicon and font awesome
-        $(".mailbox-star").click(function (e) {
-          e.preventDefault();
-          //detect type
-          var $this = $(this).find("a > i");
-          var glyph = $this.hasClass("glyphicon");
-          var fa = $this.hasClass("fa");          
-
-          //Switch states
-          if (glyph) {
-            $this.toggleClass("glyphicon-star");
-            $this.toggleClass("glyphicon-star-empty");
-          }
-
-          if (fa) {
-            $this.toggleClass("fa-star");
-            $this.toggleClass("fa-star-o");
-          }
-        });
-      });
-    </script>
-  </body>
+    <script src="assets/js/jquery-1.12.4.js"></script>
+    <script src="assets/js/jquery-ui.js"></script>
+    <script src="assets/js/jquery.multi-draggable.js"></script>
+    <script src="assets/js/mdrag-ex.js"></script>
+    <script src="assets/js/html2canvas.js"></script>
+</body>
+    <!-- END BODY-->
+    
 </html>

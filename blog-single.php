@@ -48,6 +48,7 @@
 		                        if($veri->rowCount()){                           
 		                        foreach($veri as $row){  
 		                            $row['firma_id'];
+		                            $firma_isim=$row['firma_isim'];
 		                ?>
 						<h2 class="title text-center"><?php echo $row['firma_isim']; ?></h2>					
 						<div class="single-blog-post">
@@ -105,7 +106,19 @@
 									<div class="col-sm-12">
 										<div class="product-image-wrapper">
 											<div class="single-products">
-												
+												<?php 
+													$veri = $db->prepare("select * from sube where sube_yetkili=(select uye_id from uye where uye_firmaad=?)"); 
+								                    $veri ->execute(array($firma_isim));								                   
+								                        if($veri->rowCount()){                           
+								                        foreach($veri as $row){  
+								                            $row['sube_id'];
+								                            $a= $row['sube_id'];                               
+						                        ?>
+						                        <?php echo "<a href='blog_single_sube.php?id=".$a."' class='btn btn-primary'>";?>Şubemizi İnceleyiniz</a>
+						                        <?php
+						                        }
+						                    	}
+						                        ?> 
 											</div>
 										</div>
 									</div>					
