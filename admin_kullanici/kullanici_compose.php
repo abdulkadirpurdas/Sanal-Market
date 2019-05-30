@@ -168,14 +168,14 @@
              <ul id="menu" class="collapse">
 
                 <li class="panel">
-                    <a href="index.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav">
+                    <a href="../index_kullanici.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav">
                         ANASAYFA          
                     </a>               
                 </li>
 
                 <!-- SANALKART İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav1">
+                    <a href="kullanici_sanalkart.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav1">
                         SANALKART İŞLEMLERİ            
                     </a>               
                 </li>
@@ -183,7 +183,7 @@
 
                 <!-- SİPARİŞ İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
+                    <a href="kullanici_siparis.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
                         SİPARİŞ İŞLEMLERİ                                     
                     </a>                   
                 </li>
@@ -192,7 +192,7 @@
                  <!-- FAVORİ MARKETLERİM İŞLEMLERİ KISMI -->
                 <li class="panel">
                     <a href="kullanici_favori.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
-                        FAVORİ MARKETLERİM                                     
+                        FAVORİ ÜRÜNLERİM                                       
                     </a>                   
                 </li>
                 <!-- FAVORİ MARKETLERİM BİTTİ -->
@@ -208,13 +208,9 @@
 
                 <!-- İSTATİSTİKLER İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav5">
+                    <a href="kullanici_istatistik.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav5">
                         İSTATİSTİK İŞLEMLERİ                                     
-                    </a>
-                    <ul class="collapse" id="blank-nav5">                        
-                        <li><a href="blank.html"><i class="icon-angle-right"></i> Blank Page One  </a></li>
-                        <li><a href="blank2.html"><i class="icon-angle-right"></i> Blank Page Two  </a></li>
-                    </ul>
+                    </a>                   
                 </li>
                 <!-- İSTATİSTİKLER BİTTİ -->
 

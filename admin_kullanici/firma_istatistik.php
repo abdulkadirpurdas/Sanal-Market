@@ -1,14 +1,17 @@
 <?php require_once("../baglan.php"); ?>
 <!DOCTYPE html>
-<html>
-  <!-- BEGIN HEAD-->
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="tr"> <!--<![endif]-->
+
+<!-- BEGIN HEAD-->
 <head>
    
     <meta charset="UTF-8" />
     <title>SANAL | MARKET</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="" name="description" />
-    <meta content="" name="author" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
      <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
@@ -22,12 +25,7 @@
     <!--END GLOBAL STYLES -->
 
     <!-- PAGE LEVEL STYLES -->
-    <!-- Font Awesome Icons -->
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- Ionicons -->
-    <link href="assets/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-    <!-- iCheck -->
-    <link href="assets/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
+   
     <!-- END PAGE LEVEL  STYLES -->
 
     <!-- PAGE LEVEL STYLES -->
@@ -39,20 +37,24 @@
     <![endif]-->
 </head>
     <!-- END  HEAD-->
-  <body class="padTop53 " >
+    <!-- BEGIN BODY-->
+<body class="padTop53 " >
     <?php session_start(); ?>
     <?php 
-        if($_SESSION){               
-            $eposta=$_SESSION["eposta"];
-            $b=$_SESSION["id"];                    
+        if($_SESSION){ 
+            $id=$_SESSION["id"];              
+            $uye=$_SESSION["uye"]; 
+            $eposta=$_SESSION["eposta"]; 
+            $firma=$_SESSION["firma"];          
         }
     ?> 
+     <!-- MAIN WRAPPER -->
     <div id="wrap">
-      
-     <!-- HEADER SECTION -->
-        <div id="top">
 
-            <nav class="navbar navbar-inverse navbar-fixed-top " style="padding-top: 10px;">
+
+         <!-- HEADER SECTION -->
+        <div id="top">
+  <nav class="navbar navbar-inverse navbar-fixed-top " style="padding-top: 10px;">
                 <a data-original-title="Show/Hide Menu" data-placement="bottom" data-tooltip="tooltip" class="accordion-toggle btn btn-primary btn-sm visible-xs" data-toggle="collapse" href="#menu" id="menu-toggle">
                     <i class="icon-align-justify"></i>
                 </a>
@@ -60,7 +62,9 @@
                 <header class="navbar-header">
 
                     <a href="index.php" class="navbar-brand">
-                    <img src="assets/img/logo.png" alt="" /></a>
+                    <img src="assets/img/logo.png" alt="" />
+                        
+                        </a>
                 </header>
                 <!-- END LOGO SECTION -->
                 <ul class="nav navbar-top-links navbar-right">
@@ -108,9 +112,11 @@
                                 </a>
                             </li>
                         </ul>
+
                     </li>
                     <!--END MESSAGES SECTION -->
-                                     
+
+                   
 
                     <!--ADMIN SETTINGS SECTIONS -->
 
@@ -121,7 +127,7 @@
 
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="#"><i class="icon-user"></i> User Profile </a>
-                            </li>                          
+                            </li>
                             <li class="divider"></li>
                             <li><a href="cikis.php"><i class="icon-signout"></i> Logout </a>
                             </li>
@@ -132,13 +138,11 @@
                 </ul>
 
             </nav>
-
         </div>
         <!-- END HEADER SECTION -->
 
 
-
-       
+  
         <!-- MENU SECTION -->
        <div id="left" >
             <div class="media user-media well-small">
@@ -150,7 +154,7 @@
                     <h5 class="media-heading" style="font-weight: inherit; text-transform: capitalize; font-size: 16px;">
                         <?php 
                         if($_SESSION){               
-                            echo $_SESSION["uye"];        
+                            echo $uye;        
                         }
                         ?>  
                     </h5>
@@ -164,7 +168,7 @@
                 <br />
             </div>
 
-             <ul id="menu" class="collapse">
+            <ul id="menu" class="collapse">
 
                 <li class="panel">
                     <a href="../index_kullanici.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav">
@@ -195,6 +199,7 @@
                     </a>                   
                 </li>
                 <!-- FAVORİ MARKETLERİM BİTTİ -->
+
                
 
                 <!-- MESAJ İŞLEMLERİ KISMI -->
@@ -205,7 +210,7 @@
                 </li>
                 <!-- MESAJ BİTTİ -->
 
-                <!-- İSTATİSTİKLER İŞLEMLERİ KISMI -->
+                 <!-- İSTATİSTİKLER İŞLEMLERİ KISMI -->
                 <li class="panel">
                     <a href="kullanici_istatistik.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav5">
                         İSTATİSTİK İŞLEMLERİ                                     
@@ -221,167 +226,174 @@
         <!--END MENU SECTION -->
 
 
+
         <!--PAGE CONTENT -->
         <div id="content">
-        <div class="inner" style="min-height:700px;">
 
-        <!-- Right side column. Contains the navbar and content of the page -->
-        <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h3>MESAJ İŞLEMLERİM</h3>
-          <hr />
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-          <div class="row">
-            <div class="col-md-2">
-              <a href="kullanici_compose.php" class="btn btn-primary btn-block margin-bottom">Mesaj Yaz</a>
-              <div class="box box-solid">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Klasörler</h3>
+            <div class="inner" style="min-height:1200px;">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h3>KULLANICI İSTATİSTİK İŞLEMLERİNE HOŞGELDİNİZ</h3>
+                    </div>
                 </div>
-                <div class="box-body no-padding">
-                  <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="kullanici_mailbox.php"><i class="fa fa-inbox"></i> Gelen Kutusu <span class="label label-primary pull-right"></span></a></li>
-                    <li><a href="#"><i class="fa fa-envelope-o"></i> Gönderilen</a></li>
-                    <li><a href="#"><i class="fa fa-file-text-o"></i> Taslaklar</a></li>
-                    <li><a href="#"><i class="fa fa-filter"></i> Önemsiz <span class="label label-waring pull-right"></span></a></li>
-                    <li><a href="#"><i class="fa fa-trash-o"></i> Çöp</a></li>
-                  </ul>
-                </div><!-- /.box-body -->
-              </div><!-- /. box -->
-            </div><!-- /.col -->
-            <div class="col-md-10">
-              <div class="box box-primary">
-                <div class="box-header with-border">
-                  <div class="box-tools pull-right">
-                    <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Previous"><i class="fa fa-chevron-left"></i></a>
-                    <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Next"><i class="fa fa-chevron-right"></i></a>
-                  </div>
-                </div><!-- /.box-header -->
-                <?php 
-                if (!isset($id)) {
-                        $id = $_GET['id'];
-                    } 
+                <hr />
 
-                    $veri = $db->prepare("SELECT * FROM mesaj where mesaj_id=$id"); 
-                    $veri ->execute();
-                        if($veri->rowCount()){                           
-                        foreach($veri as $row){  
-                            $row['mesaj_id'];
-                ?>
-                <div class="box-body no-padding">
-                  <div class="mailbox-read-info">
-                    <h3>Mesaj Konusu: <?php echo $row['mesaj_konu'] ?></h3>
-                    <h4>Gönderen: <?php echo $row['mesaj_gonderen'] ?> 
-                    <span class="mailbox-read-time pull-right"><?php echo $row['mesaj_tarih'] ?></span>
-                    </h4>
-                  </div><!-- /.mailbox-read-info -->
-                  <div class="mailbox-controls with-border text-center">
-                    <div class="btn-group">
-                      <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o"></i></button>
-                      <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Reply"><i class="fa fa-reply"></i></button>
-                      <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Forward"><i class="fa fa-share"></i></button>
-                    </div><!-- /.btn-group -->
-                    <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Print"><i class="fa fa-print"></i></button>
-                  </div><!-- /.mailbox-controls -->
-                  <div class="mailbox-read-message">
-                    <p><?php echo $row['mesaj_icerik']; ?></p>       
-                  </div><!-- /.mailbox-read-message -->
-                </div><!-- /.box-body --> 
-                <?php
-                }
-                }
-                ?>              
-                <div class="box-footer">
-                  <div class="pull-right">
-                    <button class="btn btn-default"><i class="fa fa-reply"></i> Reply</button>
-                    <button class="btn btn-default"><i class="fa fa-share"></i> Forward</button>
-                  </div>
-                  <button class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
-                  <button class="btn btn-default"><i class="fa fa-print"></i> Print</button>
-                </div><!-- /.box-footer -->
-              </div><!-- /. box -->
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </section><!-- /.content -->
-      </div><!-- /.content-wrapper -->
+                <div class="row">
+                    <div class="col-lg-12 ">
+                     	<div class="panel panel-default">
+                            <div class="panel-heading text-center">
+                                GENEL İSTATİSTİK DURUMU
+                            </div>
+                            
+                            <div class="panel-body">
+                            <!-- ÜRÜNLERE YAPILAN TOPLAM YORUM SAYISI -->	
+                            <?php 
+                                $a=$db->prepare("SELECT yorum_urunid FROM yorum WHERE yorum_adsoyad='$uye'");
+                                $a->execute();
+                                    foreach($a as $row){                                   
+                                        $m=$row["yorum_urunid"]; 
+                                        $veri = $db->prepare("SELECT * FROM urun where urun_id=?");                        
+                                        $veri->execute(array($m));                         
+                                        $x = $veri->fetchAll();
+                                        $xx = $a->rowCount();                                  
+                                            if($xx){    
+                                                foreach($x as $b){  
+                            ?>
+                            <?php
+                            }  
+                            }                          
+                            else{         
+                                echo "Veri bulunmamaktadır";  
+                            } 
+                            }    
+                            ?>                        
+                            <p>Toplam Yorum Sayısı:<b> <?php echo $xx;?></b></p>
+                            <!-- ÜRÜNLERE YAPILAN TOPLAM YORUM SAYISI BİTTİ -->
 
-      </div >
-      </div>
-      <!--END PAGE CONTENT -->
+                            <!-- ÜRÜNLERE YAPILAN TOPLAM BEĞENİ SAYISI -->
+                            <?php 
+								$veri = $db->prepare("SELECT * FROM begeni where begenen_id=? ");
+								$veri->execute(array($id));
+									  
+								$x = $veri->fetchAll();
+								$xx = $veri->rowCount();								  
+									if($xx){	
+										foreach($x as $b){	
+							?>
+                            <p>Toplam Beğenilen Ürün Sayısı:<b> <?php echo $xx;?></b></p>
+                            <?php
+							}  
+							}                          
+                            else{         
+                                echo "Veri bulunmamaktadır";  
+                            }                               
+                            ?>  
+                            <!-- ÜRÜNLERE YAPILAN TOPLAM BEĞENİ SAYISI BİTTİ -->
 
-      </div>
+                           
+                            </div>                                   
+                        </div>  
+                    </div>
+                </div>
+                <hr />
+                           
+                <div class="row">                  
+                    <div class="col-lg-4">                   
+                        <div class="panel panel-default">
+                            <div class="panel-heading text-center">
+                                ÜRÜNLERE YAPILAN YORUMLAR
+                            </div>
+                            
+                            <div class="panel-body">
+                            <?php 
+                                $a=$db->prepare("SELECT yorum_urunid FROM yorum WHERE yorum_adsoyad='$uye'");
+                                $a->execute();
+                                    foreach($a as $row){                                   
+                                        $m=$row["yorum_urunid"]; 
+                                        $veri = $db->prepare("SELECT * FROM urun where urun_id=?");                        
+                                        $veri->execute(array($m));                         
+                                        $x = $veri->fetchAll();
+                                        $xx = $a->rowCount();                                  
+                                            if($xx){    
+                                                foreach($x as $b){  
+                            ?>
+                            <p style="float:right;"><?php echo $b["urun_firma"];?></p>
+                            <p><?php echo $b["urun_isim"];?></p>
+                            <?php
+                            }  
+                            }                          
+                            else{         
+                                echo "Veri bulunmamaktadır";  
+                            } 
+                            }    
+                            ?>  
+                            </div>          
+                            <div class="panel-footer">
+                                Toplam Yorum Sayısı:<b><?php echo $xx;?></b>            
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">                   
+                        <div class="panel panel-default">
+                            <div class="panel-heading text-center">
+                                ÜRÜNLERE YAPILAN BEĞENİ
+                            </div>
+                            
+                            <div class="panel-body">
+                            <?php 
+                            
+                                $a=$db->prepare("SELECT begenilen_id FROM begeni WHERE begenen_id='$id'");
+                                $a->execute();
+                                    foreach($a as $row){                                   
+                                        $m=$row["begenilen_id"]; 
+                                        $veri = $db->prepare("SELECT * FROM urun where urun_id=?");                        
+                                        $veri->execute(array($m));                         
+                                        $x = $veri->fetchAll();
+                                        $xx = $a->rowCount();                                  
+                                            if($xx){    
+                                                foreach($x as $b){  
+                            
+							?>
+                            <p><?php echo $b["urun_isim"];?></p>
+                            <?php
+							}  
+							}                          
+                            else{         
+                                echo "Veri bulunmamaktadır";  
+                            } 
+                            }                              
+                            ?>  
+                            </div>          
+                            <div class="panel-footer">
+                                Toplam Beğeni Sayısı:<b><?php echo $xx;?></b>            
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+               
+            </div>
+
+       <!--END PAGE CONTENT -->
+
+
+    </div>
+
      <!--END MAIN WRAPPER -->
 
-      <!-- FOOTER -->
+   <!-- FOOTER -->
     <div id="footer">
         <p>&copy;  binarytheme &nbsp;2014 &nbsp;</p>
     </div>
     <!--END FOOTER -->
-
      <!-- GLOBAL SCRIPTS -->
     <script src="assets/plugins/jquery-2.0.3.min.js"></script>
     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <!-- END GLOBAL SCRIPTS -->
-
     <!-- PAGE LEVEL SCRIPTS -->
-    <!-- jQuery 2.1.3 -->
-    <script src="assets/plugins/jQuery/jQuery-2.1.3.min.js"></script>
-    <!-- Bootstrap 3.3.2 JS -->
-    <script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- Slimscroll -->
-    <script src="assets/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <!-- FastClick -->
-    <script src='assets/plugins/fastclick/fastclick.min.js'></script>
-    <!-- iCheck -->
-    <script src="assets/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-    <!-- Page Script -->
-    <script>
-      $(function () {
-        //Enable iCheck plugin for checkboxes
-        //iCheck for checkbox and radio inputs
-        $('input[type="checkbox"]').iCheck({
-          checkboxClass: 'icheckbox_flat-blue',
-          radioClass: 'iradio_flat-blue'
-        });
-
-        //Enable check and uncheck all functionality
-        $(".checkbox-toggle").click(function () {
-          var clicks = $(this).data('clicks');
-          if (clicks) {
-            //Uncheck all checkboxes
-            $("input[type='checkbox']", ".mailbox-messages").iCheck("uncheck");
-          } else {
-            //Check all checkboxes
-            $("input[type='checkbox']", ".mailbox-messages").iCheck("check");
-          }
-          $(this).data("clicks", !clicks);
-        });
-
-        //Handle starring for glyphicon and font awesome
-        $(".mailbox-star").click(function (e) {
-          e.preventDefault();
-          //detect type
-          var $this = $(this).find("a > i");
-          var glyph = $this.hasClass("glyphicon");
-          var fa = $this.hasClass("fa");          
-
-          //Switch states
-          if (glyph) {
-            $this.toggleClass("glyphicon-star");
-            $this.toggleClass("glyphicon-star-empty");
-          }
-
-          if (fa) {
-            $this.toggleClass("fa-star");
-            $this.toggleClass("fa-star-o");
-          }
-        });
-      });
-    </script>
-  </body>
+</body>
+    <!-- END BODY-->
+    
 </html>

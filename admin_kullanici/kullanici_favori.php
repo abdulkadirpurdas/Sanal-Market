@@ -159,14 +159,14 @@
             <ul id="menu" class="collapse">
 
                 <li class="panel">
-                    <a href="index.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav">
+                    <a href="../index_kullanici.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav">
                         ANASAYFA          
                     </a>               
                 </li>
 
                 <!-- SANALKART İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav1">
+                    <a href="kullanici_sanalkart.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav1">
                         SANALKART İŞLEMLERİ            
                     </a>               
                 </li>
@@ -174,7 +174,7 @@
 
                 <!-- SİPARİŞ İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
+                    <a href="kullanici_siparis.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
                         SİPARİŞ İŞLEMLERİ                                     
                     </a>                   
                 </li>
@@ -183,7 +183,7 @@
                  <!-- FAVORİ MARKETLERİM İŞLEMLERİ KISMI -->
                 <li class="panel">
                     <a href="kullanici_favori.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
-                        FAVORİ MARKETLERİM                                     
+                        FAVORİ ÜRÜNLERİM                                     
                     </a>                   
                 </li>
                 <!-- FAVORİ MARKETLERİM BİTTİ -->
@@ -197,16 +197,12 @@
                     </a>             
                 </li>
                 <!-- MESAJ BİTTİ -->
-
+                
                 <!-- İSTATİSTİKLER İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav5">
+                    <a href="kullanici_istatistik.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav5">
                         İSTATİSTİK İŞLEMLERİ                                     
-                    </a>
-                    <ul class="collapse" id="blank-nav5">                        
-                        <li><a href="blank.html"><i class="icon-angle-right"></i> Blank Page One  </a></li>
-                        <li><a href="blank2.html"><i class="icon-angle-right"></i> Blank Page Two  </a></li>
-                    </ul>
+                    </a>                   
                 </li>
                 <!-- İSTATİSTİKLER BİTTİ -->
 
@@ -229,6 +225,19 @@
           <h3>FAVORİ ÜRÜNLERİM</h3>
           <hr />
         </section>
+
+        <script language="javascript">
+            function confirmDel() {
+                var agree=confirm("Bu içeriği silmek istediğinizden emin misiniz?\nBu işlem geri alınamaz!");
+                if (agree) {
+                    return true ; 
+                }
+                else {
+                    return false ;
+                }
+            }
+        </script>
+
         <!--BLOCK SECTION -->
         <div class="row">
             <div class="col-lg-12">
@@ -239,6 +248,7 @@
                             $veri= $db->query("SELECT * FROM begeni where begenen_id='$b'", PDO::FETCH_ASSOC);            
                                 foreach($veri as $row){  
                                     $row['begeni_id'];
+                                    $a=$row['begeni_id'];
                                     $c=$row['begenilen_id'];
                         ?> 
                         <?php 
@@ -250,6 +260,9 @@
                             <ul style="list-style: none;">                        
                                 <li>Ürun İsim: <?php echo $row['urun_isim'] ?></li>
                                 <li>Ürun Fiyat: <?php echo $row['urun_fiyat'] ?> TL</li>
+                                <li style="margin-top: 5px;"><?php echo "<a href='favori_sil.php?id=".$a."'onclick='return confirmDel();'>";?>
+                                <p type="submit" name="urun_delete" class="btn btn-danger btn-xs">Kaldır</p></a>
+                                </li>
                             </ul>                          
                         </div>
                         <?php

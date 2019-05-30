@@ -6,8 +6,8 @@ if (!isset($id)) {
 ?>
 <!--PHP SİLME İŞLMEİ -->
 <?php	
-	$veri = $db->prepare("DELETE FROM uye WHERE uye_id = :id");
+	$veri = $db->prepare("DELETE FROM begeni WHERE begeni_id = :id");
 	$delete = $veri->execute(array('id' => $_GET['id']));
-	header("Location:index.php");	
+	header("Location:kullanici_favori.php");
 ?>
 <!--PHP SİLME İŞLMEİ -->

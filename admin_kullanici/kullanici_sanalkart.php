@@ -3,6 +3,7 @@
 <html>
   <!-- BEGIN HEAD-->
 <head>
+   
     <meta charset="UTF-8" />
     <title>SANAL | MARKET</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -21,14 +22,7 @@
     <!--END GLOBAL STYLES -->
 
     <!-- PAGE LEVEL STYLES -->
-    <!-- Font Awesome Icons -->
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- Ionicons -->
-    <link href="assets/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-    <!-- iCheck -->
-    <link href="assets/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
-    <!-- END PAGE LEVEL  STYLES -->
-
+  
     <!-- PAGE LEVEL STYLES -->
     <!-- END PAGE LEVEL  STYLES -->
        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -43,7 +37,8 @@
     <?php 
         if($_SESSION){               
             $eposta=$_SESSION["eposta"];
-            $b=$_SESSION["id"];                    
+            $b=$_SESSION["id"];  
+            $uye=$_SESSION["uye"];                 
         }
     ?> 
     <div id="wrap">
@@ -64,8 +59,7 @@
                 <!-- END LOGO SECTION -->
                 <ul class="nav navbar-top-links navbar-right">
 
-                    
-                    <!-- MESSAGES SECTION -->
+                        <!-- MESSAGES SECTION -->
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <span class="label label-success">2</span><i class="icon-envelope-alt"></i>&nbsp; <i class="icon-chevron-down"></i>
@@ -108,10 +102,10 @@
                                 </a>
                             </li>
                         </ul>
+
                     </li>
                     <!--END MESSAGES SECTION -->
-                    
-                    
+
 
                     <!--ADMIN SETTINGS SECTIONS -->
 
@@ -149,8 +143,7 @@
                     <h5 class="media-heading" style="font-weight: inherit; text-transform: capitalize; font-size: 16px;">
                         <?php 
                         if($_SESSION){               
-                            echo $_SESSION["uye"];
-                            $b=$_SESSION["uye"];                    
+                            echo $uye;                                             
                         }
                         ?>  
                     </h5>
@@ -165,7 +158,7 @@
             </div>
 
             <ul id="menu" class="collapse">
-                
+
                 <li class="panel">
                     <a href="../index_kullanici.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav">
                         ANASAYFA          
@@ -187,16 +180,16 @@
                     </a>                   
                 </li>
                 <!-- SİPARİŞ BİTTİ -->
+
                  <!-- FAVORİ MARKETLERİM İŞLEMLERİ KISMI -->
                 <li class="panel">
                     <a href="kullanici_favori.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
-                        FAVORİ ÜRÜNLERİM                                       
+                        FAVORİ ÜRÜNLERİM                                     
                     </a>                   
                 </li>
                 <!-- FAVORİ MARKETLERİM BİTTİ -->
 
                
-
                 <!-- MESAJ İŞLEMLERİ KISMI -->
                 <li class="panel">
                     <a href="kullanici_mailbox.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav4">
@@ -204,7 +197,7 @@
                     </a>             
                 </li>
                 <!-- MESAJ BİTTİ -->
-
+                
                 <!-- İSTATİSTİKLER İŞLEMLERİ KISMI -->
                 <li class="panel">
                     <a href="kullanici_istatistik.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav5">
@@ -228,124 +221,125 @@
         <!-- Right side column. Contains the navbar and content of the page -->
         <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h3>MESAJ İŞLEMLERİNE HOŞGELDİNİZ</h3>
+        <section class="content-header text-center">
+          <h3>SANALKART İŞLEMLERİ</h3>
           <hr />
         </section>
 
-        <!-- Main content -->
-        <section class="content">
-          <div class="row">
-            <div class="col-md-2">
-              <a href="admin_compose.php" class="btn btn-primary btn-block margin-bottom">Mesaj Yaz</a>
-              <div class="box box-solid">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Klasörler</h3>
-                </div>
-                <div class="box-body no-padding">
-                  <ul class="nav nav-pills nav-stacked">
-                    <li><a href="kullanici_mailbox.php"><i class="fa fa-inbox"></i> Gelen Kutusu <span class="label label-primary pull-right"></span></a></li>
-                    <li class="active"><a href="kullanici_send_mail.php"><i class="fa fa-envelope-o"></i> Gönderilen</a></li>
-                    <li><a href="#"><i class="fa fa-file-text-o"></i> Taslaklar</a></li>
-                    <li><a href="#"><i class="fa fa-filter"></i> Önemsiz <span class="label label-waring pull-right"></span></a></li>
-                    <li><a href="#"><i class="fa fa-trash-o"></i> Çöp</a></li>
-                  </ul>
-                </div><!-- /.box-body -->
-              </div><!-- /. box -->
-            </div><!-- /.col -->
+        <script language="javascript">
+            function confirmTalep() {
+                alert("Merhabalar talebiniz işleme alınmıştır...");               
+            }
+        </script>  
 
-            <div class="col-md-10">
-              <div class="box box-primary">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Gönderilen</h3>
-                  <div class="box-tools pull-right">
-                    <div class="has-feedback">
-                      <input type="text" class="form-control input-sm" placeholder="Search Mail"/>
-                    </div>
-                  </div><!-- /.box-tools -->
-                </div><!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <div class="mailbox-controls">
-                    <!-- Check all button -->
-                    <button class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>
-                    <div class="btn-group">
-                      <button class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                    </div><!-- /.btn-group -->
-                    <button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>                   
-                  </div>
-                  <div class="table-responsive mailbox-messages">
-                    <table class="table table-hover table-striped">                    
-                        <tbody>
-                        <?php  
-                            $veri = $db->prepare("SELECT * FROM mesaj where mesaj_gonderen='$b'"); 
-                            $veri ->execute();
-                                if($veri->rowCount()){                           
-                                foreach($veri as $row){  
-                                    $row['mesaj_id'];
-                                    $a=$row['mesaj_id'];                                            
-                        ?>
-                        <?php 
-                            $icerik =$row['mesaj_icerik']; 
-                            // Yazının karakter sayısı. 
-                            $uzunluk = strlen($icerik); 
-                            // Sınırlandıralacak sayı. 
-                            $sinir = 28; 
-                            // Yazının uzunluğunun sınırdan büyük olup olmadığını kontrol et. 
-                            if ($uzunluk > $sinir) { 
-                            // Eğer büyükse Devamını Oku yazısını ekle. 
-                            $yazdır = substr($icerik,0,$sinir); 
-                            } 
-                            // İçeriği ekrana yazdır. 
-                            $yazdır; 
-                        ?>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-star"><i class="fa fa-star text-yellow"></i></td>
-                           
-                          <td class="mailbox-name">
-                            <?php echo "<a href='kullanici_read_mail.php?id=".$a."'>";?>
-                            <?php echo $_SESSION["uye"]; ?></a>
-                          </td>
-                          <td class="mailbox-subject"><b><?php echo $row['mesaj_konu']; ?></b> - <?php echo $yazdır; ?>...</td>
-                          <td class="mailbox-date"><?php echo $row['mesaj_tarih']; ?></td>
-                        </tr> 
-                        <?php
-                        }
-                        }
-                        ?>                        
-                        </tbody>
-                    </table><!-- /.table -->
-                  </div><!-- /.mail-box-messages -->
-                </div><!-- /.box-body -->
-                <div class="box-footer no-padding">
-                  <div class="mailbox-controls">
-                    <!-- Check all button -->
-                    <button class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>                    
-                    <div class="btn-group">
-                      <button class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                    </div><!-- /.btn-group -->
-                    <button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                    <div class="pull-right">
-                      1-50/200
-                      <div class="btn-group">
-                        <button class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                        <button class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                      </div><!-- /.btn-group -->
-                    </div><!-- /.pull-right -->
-                  </div>
-                </div>
-              </div><!-- /. box -->
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </section><!-- /.content -->
-      </div><!-- /.content-wrapper -->
+        <form action="" method="post">
+            <button type="submit" class="btn btn-success btn-sm" name="btn_sanalkart" 
+            onclick="return confirmTalep();">Kart Talebi</button> <hr />   
+        </form>
 
-      </div >
-      </div>
+        <?php            
+            for ($i=0;$i<10;$i++){
+                $random=rand(0,1000000000);
+            }
+        ?>
+
+        <!-- PHP sanalkart talebi KOD -->
+            <?php                     
+                if(isset($_POST['btn_sanalkart'])){
+                    $sanalkart_no= $random;
+                    $sanalkart_kullanici = $_SESSION["uye"]; 
+                    $sanalkart_bakiye = 0;
+                    $sanalkart_puan = 0;
+
+                    $ekle=$db->prepare("insert into sanalkart set sanalkart_no=?,sanalkart_kullanici=?,sanalkart_bakiye=?,sanalkart_puan=?");
+                    $ekle->execute(array($sanalkart_no,$sanalkart_kullanici,$sanalkart_bakiye,$sanalkart_puan));
+                }
+            ?>
+        <!-- PHP sanalkart talebi KOD -->     
+
+        <!--BLOCK SECTION -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Sanalkart No</th>
+                                            <th>Kullanıcı Adı</th>
+                                            <th>Bakiye</th>
+                                            <th>Puan</th>
+                                            <th>Bakiye Yükle</th>
+                                        </tr>
+                                    </thead>
+                                    <?php                               
+                                        $veri= $db->query("SELECT * FROM sanalkart where sanalkart_durum='1' and sanalkart_kullanici='$uye'", PDO::FETCH_ASSOC);            
+                                            foreach($veri as $row){  
+                                               $row['sanalkart_id'];
+                                               $a=$row['sanalkart_id'];
+                                    ?>
+                                    <tbody>
+                                        <tr>
+                                            <td><?php echo $row['sanalkart_id'] ?></td>                                
+                                            <td><?php echo $row['sanalkart_no'] ?></td>
+                                            <td><?php echo $row['sanalkart_kullanici'] ?></td>
+                                            <td><?php echo $row['sanalkart_bakiye'] ?> TL</td>
+                                            <td><?php echo $row['sanalkart_puan'] ?> TL</td>
+                                            <td class="center">   
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal" 
+                                            data-target="#<?php echo $a; ?>"> Yükle</button>                              
+                                            </td>
+                                        </tr>          
+                                    </tbody>
+                                    <?php
+                                    }
+                                    ?> 
+                                    <div class="modal fade" id="<?php echo $a;?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header text-center">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="H3">Bakiye Ekleme</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                <form action="" method="post" enctype="multipart/form-data">
+                                                    <div class="form-group">
+                                                        <label>Fiyat Gir</label>
+                                                            <input class="form-control" name="sanalkart_bakiye" required />
+                                                    </div>                                                                 
+                                                 </div>
+                                                <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                                                <button type="submit" class="btn btn-primary" name="btn_kaydet">Kaydet</button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>                                   
+                                </table>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!-- PHP ÜRÜN GÜNCELLEME KOD -->
+                <?php 
+                    if(isset($_POST['btn_kaydet'])){   
+                        $sanalkart_bakiye = $_POST["sanalkart_bakiye"];
+      
+                        $guncelle=$db->prepare("UPDATE sanalkart SET sanalkart_bakiye=? WHERE sanalkart_id=?");
+                        $guncelle->execute(array($sanalkart_bakiye,$a)); 
+                    }
+                ?>
+                <!-- PHP ÜRÜN GÜNCELLEME -->
+        <!--END BLOCK SECTION -->
+        
+        </div><!-- /.content-wrapper -->
+
+        </div >
+        </div>
       <!--END PAGE CONTENT -->
 
       </div>
@@ -362,61 +356,6 @@
     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <!-- END GLOBAL SCRIPTS -->
-
-    <!-- PAGE LEVEL SCRIPTS -->
-    <!-- jQuery 2.1.3 -->
-    <script src="assets/plugins/jQuery/jQuery-2.1.3.min.js"></script>
-    <!-- Bootstrap 3.3.2 JS -->
-    <script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- Slimscroll -->
-    <script src="assets/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <!-- FastClick -->
-    <script src='assets/plugins/fastclick/fastclick.min.js'></script>
-    <!-- iCheck -->
-    <script src="assets/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-    <!-- Page Script -->
-    <script>
-      $(function () {
-        //Enable iCheck plugin for checkboxes
-        //iCheck for checkbox and radio inputs
-        $('input[type="checkbox"]').iCheck({
-          checkboxClass: 'icheckbox_flat-blue',
-          radioClass: 'iradio_flat-blue'
-        });
-
-        //Enable check and uncheck all functionality
-        $(".checkbox-toggle").click(function () {
-          var clicks = $(this).data('clicks');
-          if (clicks) {
-            //Uncheck all checkboxes
-            $("input[type='checkbox']", ".mailbox-messages").iCheck("uncheck");
-          } else {
-            //Check all checkboxes
-            $("input[type='checkbox']", ".mailbox-messages").iCheck("check");
-          }
-          $(this).data("clicks", !clicks);
-        });
-
-        //Handle starring for glyphicon and font awesome
-        $(".mailbox-star").click(function (e) {
-          e.preventDefault();
-          //detect type
-          var $this = $(this).find("a > i");
-          var glyph = $this.hasClass("glyphicon");
-          var fa = $this.hasClass("fa");          
-
-          //Switch states
-          if (glyph) {
-            $this.toggleClass("glyphicon-star");
-            $this.toggleClass("glyphicon-star-empty");
-          }
-
-          if (fa) {
-            $this.toggleClass("fa-star");
-            $this.toggleClass("fa-star-o");
-          }
-        });
-      });
-    </script>
+  
   </body>
 </html>

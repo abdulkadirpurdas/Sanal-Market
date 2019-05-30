@@ -137,7 +137,7 @@
 										if($xx){	
 											foreach($x as $b){	
 									?>
-									<ul>
+									<ul>										
 										<li><a href=""><i class="fa fa-user"></i><?php echo $b["yorum_adsoyad"];?></a></li>
 										<li><a href=""><i class="fa fa-clock-o"></i><?php echo $b["yorum_tarih"];?></a></li>
 										<p><?php echo $b["yorum_mesaj"];?></p>

@@ -171,14 +171,14 @@
             <ul id="menu" class="collapse">
 
                 <li class="panel">
-                    <a href="index.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav">
+                    <a href="../index_kullanici.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav">
                         ANASAYFA          
                     </a>               
                 </li>
 
                 <!-- SANALKART İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav1">
+                    <a href="kullanici_sanalkart.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav1">
                         SANALKART İŞLEMLERİ            
                     </a>               
                 </li>

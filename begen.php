@@ -31,9 +31,9 @@ session_start();
 				");
 			$ekle->execute([$ben,$id]); 
 			 
-			 $guncelle = $db->prepare("update urun set urun_favori = urun_favori +1 where urun_id = ?");
-			 $guncelle->execute([$id]);
-			$ok = $guncelle->rowCount(); 
+			 	$guncelle = $db->prepare("update urun set urun_favori = urun_favori +1 where urun_id = ?");
+			 	$guncelle->execute([$id]);
+				$ok = $guncelle->rowCount(); 
 			
 			  if($ok){
 				  

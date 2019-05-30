@@ -159,14 +159,14 @@
             <ul id="menu" class="collapse">
 
                 <li class="panel">
-                    <a href="index.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav">
+                    <a href="../index_kullanici.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav">
                         ANASAYFA          
                     </a>               
                 </li>
 
                 <!-- SANALKART İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav1">
+                    <a href="kullanici_sanalkart.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav1">
                         SANALKART İŞLEMLERİ            
                     </a>               
                 </li>
@@ -174,7 +174,7 @@
 
                 <!-- SİPARİŞ İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
+                    <a href="kullanici_siparis.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav2">
                         SİPARİŞ İŞLEMLERİ                                     
                     </a>                   
                 </li>
@@ -200,13 +200,10 @@
 
                 <!-- İSTATİSTİKLER İŞLEMLERİ KISMI -->
                 <li class="panel">
-                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav5">
+                    <a href="kullanici_istatistik.php" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#blank-nav5">
                         İSTATİSTİK İŞLEMLERİ                                     
                     </a>
-                    <ul class="collapse" id="blank-nav5">                        
-                        <li><a href="blank.html"><i class="icon-angle-right"></i> Blank Page One  </a></li>
-                        <li><a href="blank2.html"><i class="icon-angle-right"></i> Blank Page Two  </a></li>
-                    </ul>
+                    
                 </li>
                 <!-- İSTATİSTİKLER BİTTİ -->
 
@@ -225,18 +222,13 @@
         <!-- Right side column. Contains the navbar and content of the page -->
         <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
+        <section class="content-header text-center">
           <h3>SİPARİŞ İŞLEMLERİ</h3>
           <hr />
         </section>
         <!--BLOCK SECTION -->
         <div class="row">
-            <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading text-center" style="font-size: 20px;">
-                            SİPARİŞ İŞLEMLERİ
-                        </div> 
-                    </div>                
+            <div class="col-lg-12">                                
                     <?php    
                     $fiyat=0;                        
                         $veri= $db->query("SELECT * FROM odeme where odeme_durum=1  ", PDO::FETCH_ASSOC);            
@@ -266,23 +258,20 @@
                                $urun_fiyat=$value['sepet_urunfiyat'];
                                $urun=$db->query("SELECT * FROM urun where urun_id='$sepet_urun_id' ", PDO::FETCH_ASSOC);
                                foreach ($urun as $key => $values) {
-                                  $urun_isim=$values['urun_isim'];
-                                  
+                                  $urun_isim=$values['urun_isim'];                                
                                }
                                     ?>
                                        <p style="float:left;"> <?php echo $urun_isim; ?> &nbsp; &nbsp; &nbsp; 
                                        <?php echo $urun_adet;?> Adet &nbsp; &nbsp; &nbsp;
                                         <?php echo $urun_fiyat;?> TL </p>
-                                        
-                                        
-
                                   <?php } ?>
                                   <br><br><br>
                                         <b style="float:right;"> Toplam : <?php echo  $fiyat; ?> TL </b> 
                                     </div>
                                    
                                     <div class="panel-footer">
-                                       <a type="submit"  href="firma_siparis_onay.php?id=<?php echo $sepet_id; ?>"name="btn_siparis_onay" class="btn btn-primary btn-sm">Sipariş Onay</a>
+                                      <p>Siparişiniz Tamamlandı.</p> 
+                                      <p>Teslimata Çıktı.</p> 
                                     </div>
                                 </div>
                                 

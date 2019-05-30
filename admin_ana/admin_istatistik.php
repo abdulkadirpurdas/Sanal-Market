@@ -25,7 +25,7 @@
     <!--END GLOBAL STYLES -->
 
     <!-- PAGE LEVEL STYLES -->
-    <link href="assets/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+   
     <!-- END PAGE LEVEL  STYLES -->
 
     <!-- PAGE LEVEL STYLES -->
@@ -45,7 +45,7 @@
             $uye=$_SESSION["uye"]; 
             $eposta=$_SESSION["eposta"];        
         }
-    ?>  
+    ?>
      <!-- MAIN WRAPPER -->
     <div id="wrap">
 
@@ -112,8 +112,8 @@
 
                     </li>
                     <!--END MESSAGES SECTION -->
-                  
 
+                    
                     <!--ADMIN SETTINGS SECTIONS -->
 
                     <li class="dropdown">
@@ -153,7 +153,7 @@
                                 if($_SESSION){               
                                     echo $uye;                                
                                 }
-                            ?>   
+                            ?>  
                         </h5>
                         <ul class="list-unstyled user-info">                      
                             <li>
@@ -235,70 +235,159 @@
 
             <div class="inner" style="min-height:1200px;">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h2>ADMİN KULLANICI İŞLEMLERİNE HOŞGELDİNİZ</h2>
+                    <div class="col-lg-12 text-center">
+                        <h3>ADMİN İSTATİSTİK İŞLEMLERİNE HOŞGELDİNİZ</h3>
                     </div>
                 </div>
-                <hr />              
+                <hr />
                 
-                <script language="javascript">
-                    function confirmOnay() {
-                        var agree=confirm("Bu işlemi onaylamak istediğinizden emin misiniz?\nBu işlem geri alınamaz!");
-                            if (agree) {
-                                return true ; }
-                            else {
-                              return false ;}
-                    }
-                </script>
+                <!--Load the AJAX API-->
+                <script type="text/javascript" src="assets/js/loader.js"></script>
+                <!-- begenilen ürün istatistikleri -->
+                <script type="text/javascript">
 
-                <div class="row">               
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            KULLANICI LİSTELERİ
-                        </div>
-                        
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th>MÜŞTERİ İSMİ</th>
-                                            <th>MÜŞTERİ E-MAİL</th>
-                                            <th>MÜŞTERİ TELEFON</th>
-                                            <th>SİL</th>
-                                        </tr>
-                                    </thead>
-                                    <?php                               
-                                        $veri= $db->query("SELECT * FROM uye where uye_tur='Kullanıcı'", PDO::FETCH_ASSOC);            
-                                            foreach($veri as $row){  
-                                               $row['uye_id'];
-                                               $a=$row['uye_id'];
-                                    ?>
-                                    <tbody>
-                                        <tr>
-                                            <td><?php echo $row['uye_adsoyad'] ?></td>
-                                            <td><?php echo $row['uye_eposta'] ?></td>
-                                            <td><?php echo $row['uye_telefon'] ?></td>
-                                            <td class="center">                                           
-                                                <?php echo "<a href='function.php?id=".$a."'onclick='return confirmOnay();'>";?>
-                                                <button type="submit" name="kullanici_delete" class="btn btn-danger">Delete</button></a>
-                                            </td>
-                                        </tr>                                                                      
-                                    </tbody>
-                                    <?php
-                                    }
-                                    ?>          
-                                </table>
-                            </div>  
+                    // Load the Visualization API and the corechart package.
+                    google.charts.load('current', {'packages':['corechart']});
+
+                    // Set a callback to run when the Google Visualization API is loaded.
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    // Callback that creates and populates a data table,
+                    // instantiates the pie chart, passes in the data and
+                    // draws it.
+                    function drawChart() {
+
+                    // Create the data table.
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Topping');
+                    data.addColumn('number', 'Slices');
+                    data.addRows([
+
+                        <?php 
+                            $query = $db->prepare("SELECT * FROM  urun"); 
+                            $query ->execute();                         
+                                foreach($query as $row) {
+                                    echo "['".$row["urun_isim"]."',".$row["urun_favori"]."],"; 
+                                }                   
+                        ?>
+                     
+                    ]);
+
+                    // Set chart options
+                    var options = {'title':'Begenilen Ürünler',
+                                   'width':500,
+                                   'height':500};
+
+                    // Instantiate and draw our chart, passing in some options.
+                    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                    chart.draw(data, options);
+                }
+                </script>
+                <!-- begenilen ürün istatistikleri -->
+    
+
+                <div class="row">
+                    <div class="col-lg-6">
+                       <div id="chart_div"></div>
+                    </div>
+                    <div class="col-lg-6">                   
+                        <div class="panel panel-default">
+                            <div class="panel-heading text-center">
+                                ÜRÜNLERE YAPILAN YORUM
+                            </div>
+                            
+                            <div class="panel-body">
+                            <?php 
+                                $a=$db->prepare("SELECT yorum_urunid FROM yorum WHERE yorum_firmaid=0");
+                                $a->execute();
+                                    foreach($a as $row){                                   
+                                        $m=$row["yorum_urunid"]; 
+                                        $veri = $db->prepare("SELECT * FROM urun where urun_id=?");                        
+                                        $veri->execute(array($m));                         
+                                        $x = $veri->fetchAll();
+                                        $xx = $a->rowCount();                                  
+                                            if($xx){    
+                                                foreach($x as $b){  
+                            ?>
+                            <p style="float:right;"><?php echo $b["urun_firma"];?></p>
+                            <p><?php echo $b["urun_isim"];?></p>
+                            <?php
+                            }  
+                            }                          
+                            else{         
+                                echo "Veri bulunmamaktadır";  
+                            } 
+                            }    
+                            ?>  
+                            </div>          
+                            <div class="panel-footer">
+                                Toplam Yorum Sayısı:<b><?php echo $xx;?></b>            
+                            </div>
                         </div>
                     </div>
+
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading text-center">
+                                FİRMA LİSTESİ
+                            </div>                           
+                            <div class="panel-body">                          
+                            <?php 
+                                $veri = $db->prepare("SELECT * FROM uye where uye_tur='Firma'");
+                                $veri->execute();
+                                      
+                                $x = $veri->fetchAll();
+                                $xx = $veri->rowCount();                                  
+                                    if($xx){    
+                                        foreach($x as $b){  
+                            ?>
+                            <p><?php echo $b["uye_firmaad"] ?></p>
+                            <?php
+                            }  
+                            }
+                            else{         
+                                echo "Veri bulunmamaktadır";  
+                            }       
+                            ?>   
+                            </div>          
+                            <div class="panel-footer">
+                                Toplam Firma Sayısı:<b> <?php echo $xx; ?></b>            
+                            </div>
+                        </div>   
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading text-center">
+                                KULLANICI LİSTESİ
+                            </div>                           
+                            <div class="panel-body">                          
+                            <?php 
+                                $veri = $db->prepare("SELECT * FROM uye where uye_tur='Kullanıcı'");
+                                $veri->execute();
+                                      
+                                $x = $veri->fetchAll();
+                                $xx = $veri->rowCount();                                  
+                                    if($xx){    
+                                        foreach($x as $b){  
+                            ?>
+                            <p style="text-transform: capitalize;"><?php echo $b["uye_adsoyad"] ?></p>
+                            <?php
+                            }  
+                            }
+                            else{         
+                                echo "Veri bulunmamaktadır";  
+                            }       
+                            ?>   
+                            </div>          
+                            <div class="panel-footer">
+                                Toplam Firma Sayısı:<b> <?php echo $xx; ?></b>            
+                            </div>
+                        </div>   
+                    </div>
+
                 </div>
                
-            </div>
-              
-
-            </div>
             </div>
 
        <!--END PAGE CONTENT -->
@@ -315,17 +404,10 @@
     <!--END FOOTER -->
      <!-- GLOBAL SCRIPTS -->
     <script src="assets/plugins/jquery-2.0.3.min.js"></script>
-     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <!-- END GLOBAL SCRIPTS -->
     <!-- PAGE LEVEL SCRIPTS -->
-    <script src="assets/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="assets/plugins/dataTables/dataTables.bootstrap.js"></script>
-     <script>
-         $(document).ready(function () {
-             $('#dataTables-example').dataTable();
-         });
-    </script>
 </body>
     <!-- END BODY-->
     

@@ -225,7 +225,7 @@
 		  
 		</div>
 		<div class="modal-footer">
-			<a class="text-muted" style="float: left; color: black;" href="#">Şifremi Unuttum?</a>
+			<a class="text-muted" style="float: left; color: black;" href="sifre.php">Şifremi Unuttum?</a>
 		  	<button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
 		  	<button type="submit" name="btn_giris" class="btn btn-primary">Giriş Yap</button>
 		</div>
